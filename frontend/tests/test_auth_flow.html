@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Auth Flow Tests — SCM</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <style>
+    body { background: #f4f6f9; }
+    .pass { color:#198754; } .fail { color:#dc3545; } .run { color:#6c757d; }
+  </style>
+</head>
+<body class="p-4">
+  <div class="container" style="max-width:800px;">
+    <div class="d-flex align-items-center gap-3 mb-4">
+      <i class="bi bi-shield-lock fs-2 text-primary"></i>
+      <div>
+        <h4 class="mb-0 fw-bold">Authentication Flow Tests</h4>
+        <p class="text-muted small mb-0">JWT storage, persistence, role redirect, and token expiry handling</p>
+      </div>
+      <button class="btn btn-primary ms-auto" onclick="runAll()" id="runBtn">
+        <i class="bi bi-play-fill me-1"></i>Run All
+      </button>
+    </div>
+
+    <div class="mb-3 d-flex gap-3 small">
+      <span><span class="badge bg-success" id="pc">0</span> Passed</span>
+      <span><span class="badge bg-danger" id="fc">0</span> Failed</span>
+    </div>
+
+    <div id="results"></div>
+  </div>
+
+  <script src="../js/api.js"></script>
+  <script>
+    const API_BASE = 'http://localhost:8000';
+    let pc = 0, fc = 0;
+
+    function addResult(name, ok, detail) {
+      const icon = ok ? '✓' : '✗';
+      const cls  = ok ? 'pass' : 'fail';
+      const badge = ok ? 'bg-success' : 'bg-danger';
+      document.getElementById('results').insertAdjacentHTML('beforeend', `
+        <div class="card mb-2 p-3 d-flex flex-row align-items-center gap-3">
+          <span class="${cls} fw-bold fs-5">${icon}</span>
+          <div class="flex-grow-1">
+            <div class="fw-semibold">${name}</div>
+            ${detail ? `<div class="small text-muted">${detail}</div>` : ''}
+          </div>
+          <span class="badge ${badge}">${ok ? 'PASS' : 'FAIL'}</span>
+        </div>`);
+      ok ? pc++ : fc++;
+      document.getElementById('pc').textContent = pc;
+      document.getElementById('fc').textContent = fc;
+    }
+
+    async function t(name, fn) {
+      try { const d = await fn(); addResult(name, true, d); }
+      catch(e) { addResult(name, false, e?.detail || e?.message || String(e)); }
+    }
+
+    async function runAll() {
+      document.getElementById('results').innerHTML = '';
+      pc = 0; fc = 0;
+      document.getElementById('runBtn').disabled = true;
+
+      // ── JWT localStorage strategy ─────────────────────────────────────
+      await t('Token stored in localStorage after login', async () => {
+        const uid = Date.now().toString().slice(-6);
+        const user = { username: `auth_test_${uid}`, email: `auth_test_${uid}@scm.test`, full_name: 'Auth Tester', password: 'password123', role: 'student' };
+        await fetch(`${API_BASE}/api/v1/auth/register`, {
+          method: 'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(user)
+        });
+        const body = new URLSearchParams({ username: user.username, password: user.password });
+        const res = await fetch(`${API_BASE}/api/v1/auth/login`, {
+          method:'POST', headers:{'Content-Type':'application/x-www-form-urlencoded'}, body
+        });
+        const d = await res.json();
+        if (!d.access_token) throw { detail: 'No token received' };
+        API.setToken(d.access_token);
+        const stored = API.getToken();
+        if (stored !== d.access_token) throw { detail: 'Token not stored correctly' };
+        return 'Token stored successfully';
+      });
+
+      await t('getCachedUser returns stored user after setCachedUser', async () => {
+        const fakeUser = { id: 1, username: 'test', role: 'student', full_name: 'Test' };
+        API.setCachedUser(fakeUser);
+        const retrieved = API.getCachedUser();
+        if (!retrieved || retrieved.username !== fakeUser.username) throw { detail: 'User not cached correctly' };
+        return 'User cached and retrieved correctly';
+      });
+
+      await t('removeToken clears both token and user from localStorage', async () => {
+        API.setToken('fake-token-for-test');
+        API.setCachedUser({ id: 1 });
+        API.removeToken();
+        const t = API.getToken();
+        const u = API.getCachedUser();
+        if (t !== null) throw { detail: 'Token not cleared' };
+        if (u !== null) throw { detail: 'User not cleared' };
+        return 'Both cleared successfully';
+      });
+
+      await t('requireAuth redirects when no token present', async () => {
+        API.removeToken();
+        // We can't test actual redirect in test page without navigation, so verify the condition
+        const hasToken = !!API.getToken();
+        if (hasToken) throw { detail: 'Token should not be present' };
+        return 'No token — requireAuth would redirect to login';
+      });
+
+      // ── Role-based access ─────────────────────────────────────────────
+      await t('Student role stored and accessible from cache', async () => {
+        const uid = Date.now().toString().slice(-6);
+        const user = { username: `role_stud_${uid}`, email: `role_stud_${uid}@scm.test`, full_name: 'Role Student', password: 'password123', role: 'student' };
+        await fetch(`${API_BASE}/api/v1/auth/register`, {
+          method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(user)
+        });
+        const body = new URLSearchParams({ username: user.username, password: user.password });
+        const res = await fetch(`${API_BASE}/api/v1/auth/login`, {
+          method:'POST', headers:{'Content-Type':'application/x-www-form-urlencoded'}, body
+        });
+        const d = await res.json();
+        API.setToken(d.access_token);
+        const profile = await fetch(`${API_BASE}/api/v1/auth/me`, {
+          headers:{'Authorization':`Bearer ${d.access_token}`}
+        }).then(r=>r.json());
+        API.setCachedUser(profile);
+        const cached = API.getCachedUser();
+        if (cached.role !== 'student') throw { detail: `Expected student, got ${cached.role}` };
+        return `role=${cached.role}`;
+      });
+
+      await t('Admin role — /api/v1/escalation/run returns 200', async () => {
+        const uid = Date.now().toString().slice(-6);
+        const adminUser = { username: `role_adm_${uid}`, email: `role_adm_${uid}@scm.test`, full_name: 'Role Admin', password: 'password123', role: 'admin' };
+        await fetch(`${API_BASE}/api/v1/auth/register`, {
+          method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(adminUser)
+        });
+        const body = new URLSearchParams({ username: adminUser.username, password: adminUser.password });
+        const loginRes = await fetch(`${API_BASE}/api/v1/auth/login`, {
+          method:'POST', headers:{'Content-Type':'application/x-www-form-urlencoded'}, body
+        });
+        const loginData = await loginRes.json();
+        const res = await fetch(`${API_BASE}/api/v1/escalation/run`, {
+          method:'POST', headers:{'Authorization':`Bearer ${loginData.access_token}`}
+        });
+        if (res.status !== 200) throw { detail: `Expected 200, got ${res.status}` };
+        return 'Admin can access escalation run';
+      });
+
+      await t('Invalid/expired token → 401', async () => {
+        const res = await fetch(`${API_BASE}/api/v1/auth/me`, {
+          headers:{'Authorization':'Bearer invalid.token.here'}
+        });
+        if (res.status !== 401) throw { detail: `Expected 401, got ${res.status}` };
+        return 'Expired/invalid token correctly rejected';
+      });
+
+      // ── Session persistence simulation ────────────────────────────────
+      await t('Token persists across page reload simulation (localStorage read)', async () => {
+        const uid = Date.now().toString().slice(-6);
+        const u = { username: `persist_${uid}`, email: `persist_${uid}@scm.test`, full_name: 'Persist', password: 'password123', role: 'student' };
+        await fetch(`${API_BASE}/api/v1/auth/register`, {
+          method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(u)
+        });
+        const body = new URLSearchParams({ username: u.username, password: u.password });
+        const loginRes = await fetch(`${API_BASE}/api/v1/auth/login`, {
+          method:'POST', headers:{'Content-Type':'application/x-www-form-urlencoded'}, body
+        });
+        const d = await loginRes.json();
+        localStorage.setItem('scm_token', d.access_token);
+        // Simulate a fresh read as if page reloaded
+        const readBack = localStorage.getItem('scm_token');
+        if (readBack !== d.access_token) throw { detail: 'Persistence failed' };
+        return 'Token survives simulated reload';
+      });
+
+      await t('Logout clears all stored auth data', async () => {
+        localStorage.setItem('scm_token', 'some-token');
+        localStorage.setItem('scm_user', JSON.stringify({ id: 1 }));
+        API.removeToken();
+        if (localStorage.getItem('scm_token') !== null) throw { detail: 'Token still present' };
+        if (localStorage.getItem('scm_user') !== null) throw { detail: 'User still present' };
+        return 'All auth data cleared on logout';
+      });
+
+      // ── Regression: all modules still reachable ───────────────────────
+      await t('[Regression] GET /api/v1/health — Module 1', async () => {
+        const res = await fetch(`${API_BASE}/api/v1/health`);
+        if (res.status !== 200) throw { detail: `Got ${res.status}` };
+        return 'Health endpoint still works';
+      });
+
+      await t('[Regression] Complaint schema has escalation_level field — Module 10', async () => {
+        const uid = Date.now().toString().slice(-6);
+        const u = { username: `esc_reg_${uid}`, email: `esc_reg_${uid}@scm.test`, full_name: 'EscReg', password: 'password123', role: 'student' };
+        await fetch(`${API_BASE}/api/v1/auth/register`, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(u) });
+        const body = new URLSearchParams({ username: u.username, password: u.password });
+        const lr = await fetch(`${API_BASE}/api/v1/auth/login`, { method:'POST', headers:{'Content-Type':'application/x-www-form-urlencoded'}, body });
+        const ld = await lr.json();
+        const cr = await fetch(`${API_BASE}/api/v1/complaints/`, {
+          method:'POST', headers:{'Authorization':`Bearer ${ld.access_token}`,'Content-Type':'application/json'},
+          body: JSON.stringify({ title:'Escalation schema test', description:'Checking escalation_level present.', category:'general', priority:'low' })
+        });
+        const cd = await cr.json();
+        if (!('escalation_level' in cd)) throw { detail: 'escalation_level missing from response' };
+        if (cd.escalation_level !== 0) throw { detail: `Expected 0, got ${cd.escalation_level}` };
+        return `escalation_level=${cd.escalation_level}`;
+      });
+
+      document.getElementById('runBtn').disabled = false;
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>API Connectivity Tests — SCM</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <style>
+    body { background: #f4f6f9; }
+    .test-pass { color: #198754; }
+    .test-fail { color: #dc3545; }
+    .test-run  { color: #6c757d; }
+    .test-card { border-radius: 10px; }
+  </style>
+</head>
+<body class="p-4">
+  <div class="container" style="max-width:860px;">
+    <div class="d-flex align-items-center gap-3 mb-4">
+      <i class="bi bi-bug fs-2 text-primary"></i>
+      <div>
+        <h4 class="mb-0 fw-bold">SCM API Connectivity Tests</h4>
+        <p class="text-muted small mb-0">Runs against <code>http://localhost:8000</code></p>
+      </div>
+      <button class="btn btn-primary ms-auto" id="runAllBtn" onclick="runAll()">
+        <i class="bi bi-play-fill me-1"></i>Run All Tests
+      </button>
+    </div>
+
+    <div class="mb-3 d-flex gap-3 small">
+      <span><span class="badge bg-success me-1" id="passCount">0</span>Passed</span>
+      <span><span class="badge bg-danger me-1" id="failCount">0</span>Failed</span>
+      <span><span class="badge bg-secondary me-1" id="totalCount">0</span>Total</span>
+    </div>
+
+    <div id="testResults"></div>
+  </div>
+
+  <script src="../js/api.js"></script>
+  <script>
+    const API_BASE = 'http://localhost:8000';
+    let passCount = 0, failCount = 0;
+    let _testToken = null;
+    let _testComplaintId = null;
+
+    // ── Test Runner ──────────────────────────────────────────────────────
+
+    async function runTest(name, fn) {
+      const id = 'test-' + name.replace(/\W+/g, '-');
+      appendResult(id, name, 'running');
+      try {
+        const result = await fn();
+        passCount++;
+        appendResult(id, name, 'pass', result || '✓');
+      } catch (err) {
+        failCount++;
+        const msg = err?.detail || err?.message || String(err);
+        appendResult(id, name, 'fail', msg);
+      }
+      updateCounts();
+    }
+
+    function appendResult(id, name, state, detail = '') {
+      const existing = document.getElementById(id);
+      const icon = state === 'pass' ? '✓' : state === 'fail' ? '✗' : '…';
+      const cls  = state === 'pass' ? 'test-pass' : state === 'fail' ? 'test-fail' : 'test-run';
+      const html = `
+        <div class="card test-card mb-2 p-3 d-flex flex-row align-items-center gap-3" id="${id}">
+          <span class="${cls} fw-bold fs-5">${icon}</span>
+          <div class="flex-grow-1">
+            <div class="fw-semibold">${name}</div>
+            ${detail ? `<div class="small text-muted">${detail}</div>` : ''}
+          </div>
+          <span class="badge ${state==='pass'?'bg-success':state==='fail'?'bg-danger':'bg-secondary'}">${state}</span>
+        </div>`;
+      if (existing) existing.outerHTML = html;
+      else document.getElementById('testResults').insertAdjacentHTML('beforeend', html);
+    }
+
+    function updateCounts() {
+      document.getElementById('passCount').textContent = passCount;
+      document.getElementById('failCount').textContent = failCount;
+      document.getElementById('totalCount').textContent = passCount + failCount;
+    }
+
+    // ── Test Definitions ─────────────────────────────────────────────────
+
+    async function runAll() {
+      document.getElementById('testResults').innerHTML = '';
+      passCount = 0; failCount = 0;
+      document.getElementById('runAllBtn').disabled = true;
+
+      // ── Health ────────────────────────────────────────────────────────
+      await runTest('GET /api/v1/health — returns 200', async () => {
+        const res = await fetch(`${API_BASE}/api/v1/health`);
+        if (res.status !== 200) throw { detail: `Expected 200, got ${res.status}` };
+        const d = await res.json();
+        if (!d.status) throw { detail: 'Missing status field' };
+        return `status=${d.status}`;
+      });
+
+      // ── Auth: Register ────────────────────────────────────────────────
+      const uid = Date.now().toString().slice(-6);
+      const testUser = { username: `test_ui_${uid}`, email: `test_ui_${uid}@scm.test`, full_name: 'UI Tester', password: 'password123', role: 'student' };
+
+      await runTest('POST /api/v1/auth/register — creates student', async () => {
+        const res = await fetch(`${API_BASE}/api/v1/auth/register`, {
+          method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(testUser)
+        });
+        if (res.status !== 201) throw { detail: `Expected 201, got ${res.status}` };
+        const d = await res.json();
+        if (!d.id) throw { detail: 'Missing id in response' };
+        return `id=${d.id}`;
+      });
+
+      await runTest('POST /api/v1/auth/register — duplicate username → 400', async () => {
+        const res = await fetch(`${API_BASE}/api/v1/auth/register`, {
+          method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(testUser)
+        });
+        if (res.status !== 400) throw { detail: `Expected 400, got ${res.status}` };
+        return 'Correctly rejected duplicate';
+      });
+
+      // ── Auth: Login ───────────────────────────────────────────────────
+      await runTest('POST /api/v1/auth/login — valid credentials → token', async () => {
+        const body = new URLSearchParams({ username: testUser.username, password: testUser.password });
+        const res = await fetch(`${API_BASE}/api/v1/auth/login`, {
+          method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body
+        });
+        if (res.status !== 200) throw { detail: `Expected 200, got ${res.status}` };
+        const d = await res.json();
+        if (!d.access_token) throw { detail: 'Missing access_token' };
+        _testToken = d.access_token;
+        return 'Token received';
+      });
+
+      await runTest('POST /api/v1/auth/login — wrong password → 401', async () => {
+        const body = new URLSearchParams({ username: testUser.username, password: 'wrong_password' });
+        const res = await fetch(`${API_BASE}/api/v1/auth/login`, {
+          method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body
+        });
+        if (res.status !== 401) throw { detail: `Expected 401, got ${res.status}` };
+        return 'Correctly rejected';
+      });
+
+      // ── Auth: /me ─────────────────────────────────────────────────────
+      await runTest('GET /api/v1/auth/me — with token → user profile', async () => {
+        if (!_testToken) throw { detail: 'No token (login test failed)' };
+        const res = await fetch(`${API_BASE}/api/v1/auth/me`, {
+          headers: { 'Authorization': `Bearer ${_testToken}` }
+        });
+        if (res.status !== 200) throw { detail: `Expected 200, got ${res.status}` };
+        const d = await res.json();
+        if (d.username !== testUser.username) throw { detail: `Username mismatch: ${d.username}` };
+        return `role=${d.role}`;
+      });
+
+      await runTest('GET /api/v1/auth/me — without token → 401', async () => {
+        const res = await fetch(`${API_BASE}/api/v1/auth/me`);
+        if (res.status !== 401) throw { detail: `Expected 401, got ${res.status}` };
+        return 'Correctly rejected';
+      });
+
+      // ── Complaints ────────────────────────────────────────────────────
+      await runTest('POST /api/v1/complaints/ — create complaint', async () => {
+        if (!_testToken) throw { detail: 'No token' };
+        const res = await fetch(`${API_BASE}/api/v1/complaints/`, {
+          method: 'POST',
+          headers: { 'Authorization': `Bearer ${_testToken}`, 'Content-Type': 'application/json' },
+          body: JSON.stringify({ title: 'UI Test Complaint', description: 'Created by frontend connectivity test.', category: 'general', priority: 'low' })
+        });
+        if (res.status !== 201) throw { detail: `Expected 201, got ${res.status}` };
+        const d = await res.json();
+        if (!d.id) throw { detail: 'Missing id' };
+        _testComplaintId = d.id;
+        return `id=${d.id}, category=${d.category}, priority=${d.priority}`;
+      });
+
+      await runTest('GET /api/v1/complaints/ — list complaints', async () => {
+        if (!_testToken) throw { detail: 'No token' };
+        const res = await fetch(`${API_BASE}/api/v1/complaints/?page=1&size=5`, {
+          headers: { 'Authorization': `Bearer ${_testToken}` }
+        });
+        if (res.status !== 200) throw { detail: `Expected 200, got ${res.status}` };
+        const d = await res.json();
+        if (!Array.isArray(d.items)) throw { detail: 'Missing items array' };
+        return `total=${d.total}`;
+      });
+
+      await runTest('GET /api/v1/complaints/{id} — get specific complaint', async () => {
+        if (!_testToken || !_testComplaintId) throw { detail: 'No token or complaint ID' };
+        const res = await fetch(`${API_BASE}/api/v1/complaints/${_testComplaintId}`, {
+          headers: { 'Authorization': `Bearer ${_testToken}` }
+        });
+        if (res.status !== 200) throw { detail: `Expected 200, got ${res.status}` };
+        const d = await res.json();
+        if (d.id !== _testComplaintId) throw { detail: 'ID mismatch' };
+        return `status=${d.status}, escalation_level=${d.escalation_level}`;
+      });
+
+      await runTest('PUT /api/v1/complaints/{id} — update pending complaint', async () => {
+        if (!_testToken || !_testComplaintId) throw { detail: 'No token or complaint ID' };
+        const res = await fetch(`${API_BASE}/api/v1/complaints/${_testComplaintId}`, {
+          method: 'PUT',
+          headers: { 'Authorization': `Bearer ${_testToken}`, 'Content-Type': 'application/json' },
+          body: JSON.stringify({ title: 'UI Test Complaint (Updated)' })
+        });
+        if (res.status !== 200) throw { detail: `Expected 200, got ${res.status}` };
+        const d = await res.json();
+        if (!d.title.includes('Updated')) throw { detail: 'Title not updated' };
+        return 'Update succeeded';
+      });
+
+      await runTest('GET /api/v1/complaints/ — search filter works', async () => {
+        if (!_testToken) throw { detail: 'No token' };
+        const res = await fetch(`${API_BASE}/api/v1/complaints/?search=UI+Test`, {
+          headers: { 'Authorization': `Bearer ${_testToken}` }
+        });
+        if (res.status !== 200) throw { detail: `Expected 200, got ${res.status}` };
+        const d = await res.json();
+        return `Found ${d.total} results`;
+      });
+
+      // ── Smart Features ────────────────────────────────────────────────
+      await runTest('POST /api/v1/complaints/ — AI auto-categorization (general→network)', async () => {
+        if (!_testToken) throw { detail: 'No token' };
+        const res = await fetch(`${API_BASE}/api/v1/complaints/`, {
+          method: 'POST',
+          headers: { 'Authorization': `Bearer ${_testToken}`, 'Content-Type': 'application/json' },
+          body: JSON.stringify({ title: 'WiFi not working', description: 'Cannot connect to internet in lab room 5.', category: 'general', priority: 'low' })
+        });
+        if (res.status !== 201) throw { detail: `Expected 201, got ${res.status}` };
+        const d = await res.json();
+        return `Assigned category=${d.category} (expected: network)`;
+      });
+
+      await runTest('POST /api/v1/complaints/ — AI priority detection (fire → high)', async () => {
+        if (!_testToken) throw { detail: 'No token' };
+        const res = await fetch(`${API_BASE}/api/v1/complaints/`, {
+          method: 'POST',
+          headers: { 'Authorization': `Bearer ${_testToken}`, 'Content-Type': 'application/json' },
+          body: JSON.stringify({ title: 'Smoke and possible fire', description: 'There is fire in the server room.', category: 'electrical', priority: 'low' })
+        });
+        if (res.status !== 201) throw { detail: `Expected 201, got ${res.status}` };
+        const d = await res.json();
+        return `Priority upgraded to: ${d.priority}`;
+      });
+
+      await runTest('POST /api/v1/complaints/ — duplicate_of field present in response', async () => {
+        if (!_testToken) throw { detail: 'No token' };
+        const res = await fetch(`${API_BASE}/api/v1/complaints/`, {
+          method: 'POST',
+          headers: { 'Authorization': `Bearer ${_testToken}`, 'Content-Type': 'application/json' },
+          body: JSON.stringify({ title: 'WiFi not working again', description: 'Cannot connect to internet in lab room 5.', category: 'network', priority: 'low' })
+        });
+        if (res.status !== 201) throw { detail: `Expected 201, got ${res.status}` };
+        const d = await res.json();
+        if (!('duplicate_of' in d)) throw { detail: 'duplicate_of field missing' };
+        return `duplicate_of=${d.duplicate_of}`;
+      });
+
+      await runTest('POST /api/v1/complaints/ — estimated_resolution_hours present', async () => {
+        if (!_testToken) throw { detail: 'No token' };
+        const res = await fetch(`${API_BASE}/api/v1/complaints/`, {
+          method: 'POST',
+          headers: { 'Authorization': `Bearer ${_testToken}`, 'Content-Type': 'application/json' },
+          body: JSON.stringify({ title: 'Projector broken in class B2', description: 'The projector is not showing anything on screen.', category: 'classroom', priority: 'medium' })
+        });
+        if (res.status !== 201) throw { detail: `Expected 201, got ${res.status}` };
+        const d = await res.json();
+        if (!('estimated_resolution_hours' in d)) throw { detail: 'estimated_resolution_hours missing' };
+        return `est=${d.estimated_resolution_hours}h`;
+      });
+
+      // ── Student cannot access admin routes ────────────────────────────
+      await runTest('POST /api/v1/escalation/run — student → 403', async () => {
+        if (!_testToken) throw { detail: 'No token' };
+        const res = await fetch(`${API_BASE}/api/v1/escalation/run`, {
+          method: 'POST', headers: { 'Authorization': `Bearer ${_testToken}` }
+        });
+        if (res.status !== 403) throw { detail: `Expected 403, got ${res.status}` };
+        return 'Correctly forbidden for student';
+      });
+
+      await runTest('GET /api/v1/escalation/logs — student → 403', async () => {
+        if (!_testToken) throw { detail: 'No token' };
+        const res = await fetch(`${API_BASE}/api/v1/escalation/logs`, {
+          headers: { 'Authorization': `Bearer ${_testToken}` }
+        });
+        if (res.status !== 403) throw { detail: `Expected 403, got ${res.status}` };
+        return 'Correctly forbidden for student';
+      });
+
+      await runTest('POST /api/v1/complaints/run-clustering — student → 403', async () => {
+        if (!_testToken) throw { detail: 'No token' };
+        const res = await fetch(`${API_BASE}/api/v1/complaints/run-clustering`, {
+          method: 'POST', headers: { 'Authorization': `Bearer ${_testToken}` }
+        });
+        if (res.status !== 403) throw { detail: `Expected 403, got ${res.status}` };
+        return 'Correctly forbidden for student';
+      });
+
+      document.getElementById('runAllBtn').disabled = false;
+    }
+  </script>
+</body>
+</html>

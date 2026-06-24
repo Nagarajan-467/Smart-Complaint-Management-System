@@ -1,0 +1,937 @@
+2026-06-23 15:01:48 | INFO     | smart_complaint.logging_config:62 | Logging initialized — level=DEBUG, file=logs/app.log
+2026-06-23 15:01:48 | INFO     | smart_complaint.app.main.main:100 | Application created successfully.
+2026-06-23 15:01:48 | INFO     | smart_complaint.app.main.main:29 | Starting SmartComplaintManager v1.0.0 [development]
+2026-06-23 15:04:58 | INFO     | smart_complaint.logging_config:62 | Logging initialized — level=DEBUG, file=logs/app.log
+2026-06-23 15:04:58 | INFO     | smart_complaint.app.main.main:100 | Application created successfully.
+2026-06-23 15:04:58 | INFO     | smart_complaint.app.main.main:29 | Starting SmartComplaintManager v1.0.0 [development]
+2026-06-23 15:08:30 | INFO     | smart_complaint.logging_config:62 | Logging initialized — level=DEBUG, file=logs/app.log
+2026-06-23 15:08:30 | INFO     | smart_complaint.app.main.main:100 | Application created successfully.
+2026-06-23 15:08:30 | INFO     | smart_complaint.app.main.main:29 | Starting SmartComplaintManager v1.0.0 [development]
+2026-06-23 15:13:46 | INFO     | smart_complaint.logging_config:62 | Logging initialized — level=DEBUG, file=logs/app.log
+2026-06-23 15:13:46 | INFO     | smart_complaint.app.main.main:100 | Application created successfully.
+2026-06-23 15:13:46 | INFO     | smart_complaint.app.main.main:29 | Starting SmartComplaintManager v1.0.0 [development]
+2026-06-23 15:13:46 | INFO     | smart_complaint.app.database.database:83 | Database tables created / verified.
+2026-06-23 15:13:53 | INFO     | smart_complaint.app.main.main:41 | Shutting down SmartComplaintManager
+2026-06-23 15:14:02 | INFO     | smart_complaint.logging_config:62 | Logging initialized — level=DEBUG, file=logs/app.log
+2026-06-23 15:14:02 | INFO     | smart_complaint.app.main.main:100 | Application created successfully.
+2026-06-23 15:14:02 | INFO     | smart_complaint.app.main.main:29 | Starting SmartComplaintManager v1.0.0 [development]
+2026-06-23 15:14:02 | INFO     | smart_complaint.app.database.database:83 | Database tables created / verified.
+2026-06-23 15:20:54 | INFO     | smart_complaint.app.database.database:91 | Database connection verified.
+2026-06-23 15:21:04 | INFO     | smart_complaint.app.database.database:91 | Database connection verified.
+2026-06-23 15:21:04 | INFO     | smart_complaint.app.database.database:91 | Database connection verified.
+2026-06-23 15:21:05 | INFO     | smart_complaint.app.database.database:91 | Database connection verified.
+2026-06-23 15:21:05 | INFO     | smart_complaint.app.database.database:91 | Database connection verified.
+2026-06-23 15:24:45 | INFO     | smart_complaint.app.main.main:41 | Shutting down SmartComplaintManager
+2026-06-23 15:24:47 | INFO     | smart_complaint.logging_config:62 | Logging initialized — level=DEBUG, file=logs/app.log
+2026-06-23 15:24:47 | INFO     | smart_complaint.app.main.main:100 | Application created successfully.
+2026-06-23 15:24:47 | INFO     | smart_complaint.app.main.main:29 | Starting SmartComplaintManager v1.0.0 [development]
+2026-06-23 15:24:47 | INFO     | smart_complaint.app.database.database:83 | Database tables created / verified.
+2026-06-23 15:24:48 | INFO     | smart_complaint.app.main.main:41 | Shutting down SmartComplaintManager
+2026-06-23 15:36:03 | INFO     | smart_complaint.logging_config:62 | Logging initialized — level=DEBUG, file=logs/app.log
+2026-06-23 15:36:57 | INFO     | smart_complaint.logging_config:62 | Logging initialized — level=DEBUG, file=logs/app.log
+2026-06-23 15:36:57 | INFO     | smart_complaint.app.main.main:105 | Application created successfully.
+2026-06-23 15:36:57 | INFO     | smart_complaint.app.main.main:29 | Starting SmartComplaintManager v1.0.0 [development]
+2026-06-23 15:36:57 | INFO     | smart_complaint.app.database.database:83 | Database tables created / verified.
+2026-06-23 15:36:57 | ERROR    | smart_complaint.app.main.main:80 | Unhandled exception on POST http://testserver/api/v1/auth/register
+Traceback (most recent call last):
+  File "C:\Users\Nagarajan\SmartComplaintManager\v_env\Lib\site-packages\starlette\middleware\errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\Nagarajan\SmartComplaintManager\v_env\Lib\site-packages\starlette\middleware\cors.py", line 85, in __call__
+    await self.app(scope, receive, send)
+  File "C:\Users\Nagarajan\SmartComplaintManager\v_env\Lib\site-packages\starlette\middleware\exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "C:\Users\Nagarajan\SmartComplaintManager\v_env\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "C:\Users\Nagarajan\SmartComplaintManager\v_env\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\Users\Nagarajan\SmartComplaintManager\v_env\Lib\site-packages\starlette\routing.py", line 714, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\Users\Nagarajan\SmartComplaintManager\v_env\Lib\site-packages\starlette\routing.py", line 734, in app
+    await route.handle(scope, receive, send)
+  File "C:\Users\Nagarajan\SmartComplaintManager\v_env\Lib\site-packages\starlette\routing.py", line 288, in handle
+    await self.app(scope, receive, send)
+  File "C:\Users\Nagarajan\SmartComplaintManager\v_env\Lib\site-packages\starlette\routing.py", line 76, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "C:\Users\Nagarajan\SmartComplaintManager\v_env\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "C:\Users\Nagarajan\SmartComplaintManager\v_env\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\Users\Nagarajan\SmartComplaintManager\v_env\Lib\site-packages\starlette\routing.py", line 73, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "C:\Users\Nagarajan\SmartComplaintManager\v_env\Lib\site-packages\fastapi\routing.py", line 301, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Nagarajan\SmartComplaintManager\v_env\Lib\site-packages\fastapi\routing.py", line 214, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Nagarajan\SmartComplaintManager\v_env\Lib\site-packages\starlette\concurrency.py", line 37, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Nagarajan\SmartComplaintManager\v_env\Lib\site-packages\anyio\to_thread.py", line 63, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Nagarajan\SmartComplaintManager\v_env\Lib\site-packages\anyio\_backends\_asyncio.py", line 2592, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "C:\Users\Nagarajan\SmartComplaintManager\v_env\Lib\site-packages\anyio\_backends\_asyncio.py", line 1029, in run
+    result = context.run(func, *args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Nagarajan\SmartComplaintManager\app\api\v1\auth.py", line 41, in register_user
+    return auth_service.create_user(db, user_in=user_in)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Nagarajan\SmartComplaintManager\app\services\auth_service.py", line 48, in create_user
+    password_hash=get_password_hash(user_in.password),
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Nagarajan\SmartComplaintManager\app\services\auth_service.py", line 27, in get_password_hash
+    return pwd_context.hash(password)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Nagarajan\SmartComplaintManager\v_env\Lib\site-packages\passlib\context.py", line 2258, in hash
+    return record.hash(secret, **kwds)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Nagarajan\SmartComplaintManager\v_env\Lib\site-packages\passlib\utils\handlers.py", line 779, in hash
+    self.checksum = self._calc_checksum(secret)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Nagarajan\SmartComplaintManager\v_env\Lib\site-packages\passlib\handlers\bcrypt.py", line 591, in _calc_checksum
+    self._stub_requires_backend()
+  File "C:\Users\Nagarajan\SmartComplaintManager\v_env\Lib\site-packages\passlib\utils\handlers.py", line 2254, in _stub_requires_backend
+    cls.set_backend()
+  File "C:\Users\Nagarajan\SmartComplaintManager\v_env\Lib\site-packages\passlib\utils\handlers.py", line 2156, in set_backend
+    return owner.set_backend(name, dryrun=dryrun)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Nagarajan\SmartComplaintManager\v_env\Lib\site-packages\passlib\utils\handlers.py", line 2163, in set_backend
+    return cls.set_backend(name, dryrun=dryrun)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Nagarajan\SmartComplaintManager\v_env\Lib\site-packages\passlib\utils\handlers.py", line 2188, in set_backend
+    cls._set_backend(name, dryrun)
+  File "C:\Users\Nagarajan\SmartComplaintManager\v_env\Lib\site-packages\passlib\utils\handlers.py", line 2311, in _set_backend
+    super(SubclassBackendMixin, cls)._set_backend(name, dryrun)
+  File "C:\Users\Nagarajan\SmartComplaintManager\v_env\Lib\site-packages\passlib\utils\handlers.py", line 2224, in _set_backend
+    ok = loader(**kwds)
+         ^^^^^^^^^^^^^^
+  File "C:\Users\Nagarajan\SmartComplaintManager\v_env\Lib\site-packages\passlib\handlers\bcrypt.py", line 626, in _load_backend_mixin
+    return mixin_cls._finalize_backend_mixin(name, dryrun)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Nagarajan\SmartComplaintManager\v_env\Lib\site-packages\passlib\handlers\bcrypt.py", line 421, in _finalize_backend_mixin
+    if detect_wrap_bug(IDENT_2A):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Nagarajan\SmartComplaintManager\v_env\Lib\site-packages\passlib\handlers\bcrypt.py", line 380, in detect_wrap_bug
+    if verify(secret, bug_hash):
+       ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Nagarajan\SmartComplaintManager\v_env\Lib\site-packages\passlib\utils\handlers.py", line 792, in verify
+    return consteq(self._calc_checksum(secret), chk)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Nagarajan\SmartComplaintManager\v_env\Lib\site-packages\passlib\handlers\bcrypt.py", line 655, in _calc_checksum
+    hash = _bcrypt.hashpw(secret, config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: password cannot be longer than 72 bytes, truncate manually if necessary (e.g. my_password[:72])
+2026-06-23 15:36:58 | ERROR    | smart_complaint.app.main.main:80 | Unhandled exception on POST http://testserver/api/v1/auth/register
+Traceback (most recent call last):
+  File "C:\Users\Nagarajan\SmartComplaintManager\v_env\Lib\site-packages\starlette\middleware\errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\Nagarajan\SmartComplaintManager\v_env\Lib\site-packages\starlette\middleware\cors.py", line 85, in __call__
+    await self.app(scope, receive, send)
+  File "C:\Users\Nagarajan\SmartComplaintManager\v_env\Lib\site-packages\starlette\middleware\exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "C:\Users\Nagarajan\SmartComplaintManager\v_env\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "C:\Users\Nagarajan\SmartComplaintManager\v_env\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\Users\Nagarajan\SmartComplaintManager\v_env\Lib\site-packages\starlette\routing.py", line 714, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\Users\Nagarajan\SmartComplaintManager\v_env\Lib\site-packages\starlette\routing.py", line 734, in app
+    await route.handle(scope, receive, send)
+  File "C:\Users\Nagarajan\SmartComplaintManager\v_env\Lib\site-packages\starlette\routing.py", line 288, in handle
+    await self.app(scope, receive, send)
+  File "C:\Users\Nagarajan\SmartComplaintManager\v_env\Lib\site-packages\starlette\routing.py", line 76, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "C:\Users\Nagarajan\SmartComplaintManager\v_env\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "C:\Users\Nagarajan\SmartComplaintManager\v_env\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\Users\Nagarajan\SmartComplaintManager\v_env\Lib\site-packages\starlette\routing.py", line 73, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "C:\Users\Nagarajan\SmartComplaintManager\v_env\Lib\site-packages\fastapi\routing.py", line 301, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Nagarajan\SmartComplaintManager\v_env\Lib\site-packages\fastapi\routing.py", line 214, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Nagarajan\SmartComplaintManager\v_env\Lib\site-packages\starlette\concurrency.py", line 37, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Nagarajan\SmartComplaintManager\v_env\Lib\site-packages\anyio\to_thread.py", line 63, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Nagarajan\SmartComplaintManager\v_env\Lib\site-packages\anyio\_backends\_asyncio.py", line 2592, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "C:\Users\Nagarajan\SmartComplaintManager\v_env\Lib\site-packages\anyio\_backends\_asyncio.py", line 1029, in run
+    result = context.run(func, *args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Nagarajan\SmartComplaintManager\app\api\v1\auth.py", line 41, in register_user
+    return auth_service.create_user(db, user_in=user_in)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Nagarajan\SmartComplaintManager\app\services\auth_service.py", line 48, in create_user
+    password_hash=get_password_hash(user_in.password),
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Nagarajan\SmartComplaintManager\app\services\auth_service.py", line 27, in get_password_hash
+    return pwd_context.hash(password)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Nagarajan\SmartComplaintManager\v_env\Lib\site-packages\passlib\context.py", line 2258, in hash
+    return record.hash(secret, **kwds)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Nagarajan\SmartComplaintManager\v_env\Lib\site-packages\passlib\utils\handlers.py", line 779, in hash
+    self.checksum = self._calc_checksum(secret)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Nagarajan\SmartComplaintManager\v_env\Lib\site-packages\passlib\handlers\bcrypt.py", line 591, in _calc_checksum
+    self._stub_requires_backend()
+  File "C:\Users\Nagarajan\SmartComplaintManager\v_env\Lib\site-packages\passlib\utils\handlers.py", line 2254, in _stub_requires_backend
+    cls.set_backend()
+  File "C:\Users\Nagarajan\SmartComplaintManager\v_env\Lib\site-packages\passlib\utils\handlers.py", line 2156, in set_backend
+    return owner.set_backend(name, dryrun=dryrun)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Nagarajan\SmartComplaintManager\v_env\Lib\site-packages\passlib\utils\handlers.py", line 2163, in set_backend
+    return cls.set_backend(name, dryrun=dryrun)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Nagarajan\SmartComplaintManager\v_env\Lib\site-packages\passlib\utils\handlers.py", line 2188, in set_backend
+    cls._set_backend(name, dryrun)
+  File "C:\Users\Nagarajan\SmartComplaintManager\v_env\Lib\site-packages\passlib\utils\handlers.py", line 2311, in _set_backend
+    super(SubclassBackendMixin, cls)._set_backend(name, dryrun)
+  File "C:\Users\Nagarajan\SmartComplaintManager\v_env\Lib\site-packages\passlib\utils\handlers.py", line 2224, in _set_backend
+    ok = loader(**kwds)
+         ^^^^^^^^^^^^^^
+  File "C:\Users\Nagarajan\SmartComplaintManager\v_env\Lib\site-packages\passlib\handlers\bcrypt.py", line 626, in _load_backend_mixin
+    return mixin_cls._finalize_backend_mixin(name, dryrun)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Nagarajan\SmartComplaintManager\v_env\Lib\site-packages\passlib\handlers\bcrypt.py", line 421, in _finalize_backend_mixin
+    if detect_wrap_bug(IDENT_2A):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Nagarajan\SmartComplaintManager\v_env\Lib\site-packages\passlib\handlers\bcrypt.py", line 380, in detect_wrap_bug
+    if verify(secret, bug_hash):
+       ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Nagarajan\SmartComplaintManager\v_env\Lib\site-packages\passlib\utils\handlers.py", line 792, in verify
+    return consteq(self._calc_checksum(secret), chk)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Nagarajan\SmartComplaintManager\v_env\Lib\site-packages\passlib\handlers\bcrypt.py", line 655, in _calc_checksum
+    hash = _bcrypt.hashpw(secret, config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: password cannot be longer than 72 bytes, truncate manually if necessary (e.g. my_password[:72])
+2026-06-23 15:36:59 | INFO     | smart_complaint.app.main.main:44 | Shutting down SmartComplaintManager
+2026-06-23 15:40:03 | INFO     | smart_complaint.logging_config:62 | Logging initialized — level=DEBUG, file=logs/app.log
+2026-06-23 15:40:04 | INFO     | smart_complaint.app.main.main:105 | Application created successfully.
+2026-06-23 15:40:04 | INFO     | smart_complaint.app.main.main:29 | Starting SmartComplaintManager v1.0.0 [development]
+2026-06-23 15:40:04 | INFO     | smart_complaint.app.database.database:83 | Database tables created / verified.
+2026-06-23 15:40:05 | INFO     | smart_complaint.app.main.main:44 | Shutting down SmartComplaintManager
+2026-06-23 15:43:06 | INFO     | smart_complaint.logging_config:62 | Logging initialized — level=DEBUG, file=logs/app.log
+2026-06-23 15:43:07 | INFO     | smart_complaint.app.main.main:107 | Application created successfully.
+2026-06-23 15:43:07 | INFO     | smart_complaint.app.main.main:29 | Starting SmartComplaintManager v1.0.0 [development]
+2026-06-23 15:43:07 | INFO     | smart_complaint.app.database.database:83 | Database tables created / verified.
+2026-06-23 15:43:09 | INFO     | smart_complaint.app.main.main:44 | Shutting down SmartComplaintManager
+2026-06-23 16:08:07 | INFO     | smart_complaint.logging_config:62 | Logging initialized — level=DEBUG, file=logs/app.log
+2026-06-23 16:08:22 | INFO     | smart_complaint.app.main.main:107 | Application created successfully.
+2026-06-23 16:08:22 | INFO     | smart_complaint.app.main.main:29 | Starting SmartComplaintManager v1.0.0 [development]
+2026-06-23 16:08:22 | INFO     | smart_complaint.app.database.database:83 | Database tables created / verified.
+2026-06-23 16:08:23 | INFO     | smart_complaint.app.main.main:44 | Shutting down SmartComplaintManager
+2026-06-23 16:08:41 | INFO     | smart_complaint.logging_config:62 | Logging initialized — level=DEBUG, file=logs/app.log
+2026-06-23 16:08:43 | INFO     | smart_complaint.app.main.main:107 | Application created successfully.
+2026-06-23 16:08:43 | INFO     | smart_complaint.app.main.main:29 | Starting SmartComplaintManager v1.0.0 [development]
+2026-06-23 16:08:43 | INFO     | smart_complaint.app.database.database:83 | Database tables created / verified.
+2026-06-23 16:08:44 | INFO     | smart_complaint.app.main.main:44 | Shutting down SmartComplaintManager
+2026-06-23 16:09:33 | INFO     | smart_complaint.logging_config:62 | Logging initialized — level=DEBUG, file=logs/app.log
+2026-06-23 16:09:34 | INFO     | smart_complaint.app.main.main:107 | Application created successfully.
+2026-06-23 16:09:34 | INFO     | smart_complaint.app.main.main:29 | Starting SmartComplaintManager v1.0.0 [development]
+2026-06-23 16:09:35 | INFO     | smart_complaint.app.database.database:83 | Database tables created / verified.
+2026-06-23 16:09:36 | INFO     | smart_complaint.app.main.main:44 | Shutting down SmartComplaintManager
+2026-06-23 16:10:07 | INFO     | smart_complaint.logging_config:62 | Logging initialized — level=DEBUG, file=logs/app.log
+2026-06-23 16:10:09 | INFO     | smart_complaint.app.main.main:107 | Application created successfully.
+2026-06-23 16:10:09 | INFO     | smart_complaint.app.main.main:29 | Starting SmartComplaintManager v1.0.0 [development]
+2026-06-23 16:10:09 | INFO     | smart_complaint.app.database.database:83 | Database tables created / verified.
+2026-06-23 16:10:10 | INFO     | smart_complaint.app.main.main:44 | Shutting down SmartComplaintManager
+2026-06-23 16:10:42 | INFO     | smart_complaint.logging_config:62 | Logging initialized — level=DEBUG, file=logs/app.log
+2026-06-23 16:10:45 | INFO     | smart_complaint.app.main.main:107 | Application created successfully.
+2026-06-23 16:10:45 | INFO     | smart_complaint.app.main.main:29 | Starting SmartComplaintManager v1.0.0 [development]
+2026-06-23 16:10:45 | INFO     | smart_complaint.app.database.database:83 | Database tables created / verified.
+2026-06-23 16:10:47 | INFO     | smart_complaint.app.main.main:44 | Shutting down SmartComplaintManager
+2026-06-23 16:12:57 | INFO     | smart_complaint.logging_config:62 | Logging initialized — level=DEBUG, file=logs/app.log
+2026-06-23 16:13:00 | INFO     | smart_complaint.app.main.main:107 | Application created successfully.
+2026-06-23 16:13:00 | INFO     | smart_complaint.app.main.main:29 | Starting SmartComplaintManager v1.0.0 [development]
+2026-06-23 16:13:00 | INFO     | smart_complaint.app.database.database:83 | Database tables created / verified.
+2026-06-23 16:13:01 | INFO     | smart_complaint.app.main.main:44 | Shutting down SmartComplaintManager
+2026-06-23 16:13:34 | INFO     | smart_complaint.logging_config:62 | Logging initialized — level=DEBUG, file=logs/app.log
+2026-06-23 16:13:36 | INFO     | smart_complaint.app.main.main:107 | Application created successfully.
+2026-06-23 16:13:36 | INFO     | smart_complaint.app.main.main:29 | Starting SmartComplaintManager v1.0.0 [development]
+2026-06-23 16:13:36 | INFO     | smart_complaint.app.database.database:83 | Database tables created / verified.
+2026-06-23 16:13:37 | INFO     | smart_complaint.app.main.main:44 | Shutting down SmartComplaintManager
+2026-06-23 16:18:29 | INFO     | smart_complaint.logging_config:62 | Logging initialized — level=DEBUG, file=logs/app.log
+2026-06-23 16:18:31 | INFO     | smart_complaint.app.main.main:107 | Application created successfully.
+2026-06-23 16:18:31 | INFO     | smart_complaint.app.main.main:29 | Starting SmartComplaintManager v1.0.0 [development]
+2026-06-23 16:18:32 | INFO     | smart_complaint.app.database.database:83 | Database tables created / verified.
+2026-06-23 16:18:33 | INFO     | smart_complaint.app.main.main:44 | Shutting down SmartComplaintManager
+2026-06-23 16:20:04 | INFO     | smart_complaint.logging_config:62 | Logging initialized — level=DEBUG, file=logs/app.log
+2026-06-23 16:20:07 | INFO     | smart_complaint.app.main.main:107 | Application created successfully.
+2026-06-23 16:20:07 | INFO     | smart_complaint.app.main.main:29 | Starting SmartComplaintManager v1.0.0 [development]
+2026-06-23 16:20:08 | INFO     | smart_complaint.app.database.database:83 | Database tables created / verified.
+2026-06-23 16:20:10 | INFO     | smart_complaint.app.main.main:44 | Shutting down SmartComplaintManager
+2026-06-23 20:07:56 | INFO     | smart_complaint.logging_config:62 | Logging initialized — level=DEBUG, file=logs/app.log
+2026-06-23 20:08:11 | INFO     | smart_complaint.app.main.main:114 | Application created successfully.
+2026-06-23 20:08:11 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:99 | Escalation run complete: {'notified': 0, 'escalated': 0, 'critical': 0}
+2026-06-23 20:08:11 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:96 | Complaint #999 flagged for staff notification (24h+)
+2026-06-23 20:08:12 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:99 | Escalation run complete: {'notified': 1, 'escalated': 0, 'critical': 0}
+2026-06-23 20:08:12 | WARNING  | smart_complaint.app.services.escalation_service.escalation_service:85 | Complaint #999 escalated to admin (48h+)
+2026-06-23 20:08:12 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:99 | Escalation run complete: {'notified': 0, 'escalated': 1, 'critical': 0}
+2026-06-23 20:08:12 | WARNING  | smart_complaint.app.services.escalation_service.escalation_service:73 | Complaint #999 escalated to CRITICAL (72h+)
+2026-06-23 20:08:12 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:99 | Escalation run complete: {'notified': 0, 'escalated': 0, 'critical': 1}
+2026-06-23 20:08:12 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:99 | Escalation run complete: {'notified': 0, 'escalated': 0, 'critical': 0}
+2026-06-23 20:08:12 | WARNING  | smart_complaint.app.services.escalation_service.escalation_service:73 | Complaint #999 escalated to CRITICAL (72h+)
+2026-06-23 20:08:12 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:99 | Escalation run complete: {'notified': 0, 'escalated': 0, 'critical': 1}
+2026-06-23 20:08:12 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:96 | Complaint #999 flagged for staff notification (24h+)
+2026-06-23 20:08:12 | WARNING  | smart_complaint.app.services.escalation_service.escalation_service:85 | Complaint #999 escalated to admin (48h+)
+2026-06-23 20:08:12 | WARNING  | smart_complaint.app.services.escalation_service.escalation_service:73 | Complaint #999 escalated to CRITICAL (72h+)
+2026-06-23 20:08:12 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:99 | Escalation run complete: {'notified': 1, 'escalated': 1, 'critical': 1}
+2026-06-23 20:08:12 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:96 | Complaint #999 flagged for staff notification (24h+)
+2026-06-23 20:08:12 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:99 | Escalation run complete: {'notified': 1, 'escalated': 0, 'critical': 0}
+2026-06-23 20:08:12 | WARNING  | smart_complaint.app.services.escalation_service.escalation_service:73 | Complaint #999 escalated to CRITICAL (72h+)
+2026-06-23 20:08:12 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:99 | Escalation run complete: {'notified': 0, 'escalated': 0, 'critical': 1}
+2026-06-23 20:08:12 | INFO     | smart_complaint.app.main.main:29 | Starting SmartComplaintManager v1.0.0 [development]
+2026-06-23 20:08:12 | INFO     | smart_complaint.app.database.database:83 | Database tables created / verified.
+2026-06-23 20:08:12 | INFO     | smart_complaint.app.services.scheduler.scheduler:46 | Escalation scheduler started (interval=5 min)
+2026-06-23 20:08:14 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:99 | Escalation run complete: {'notified': 0, 'escalated': 0, 'critical': 0}
+2026-06-23 20:08:14 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:99 | Escalation run complete: {'notified': 0, 'escalated': 0, 'critical': 0}
+2026-06-23 20:08:14 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:99 | Escalation run complete: {'notified': 0, 'escalated': 0, 'critical': 0}
+2026-06-23 20:08:19 | INFO     | smart_complaint.app.services.scheduler.scheduler:53 | Escalation scheduler stopped.
+2026-06-23 20:08:19 | INFO     | smart_complaint.app.main.main:49 | Shutting down SmartComplaintManager
+2026-06-23 20:08:34 | INFO     | smart_complaint.logging_config:62 | Logging initialized — level=DEBUG, file=logs/app.log
+2026-06-23 20:08:36 | INFO     | smart_complaint.app.main.main:114 | Application created successfully.
+2026-06-23 20:08:36 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:99 | Escalation run complete: {'notified': 0, 'escalated': 0, 'critical': 0}
+2026-06-23 20:08:36 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:96 | Complaint #999 flagged for staff notification (24h+)
+2026-06-23 20:08:36 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:99 | Escalation run complete: {'notified': 1, 'escalated': 0, 'critical': 0}
+2026-06-23 20:08:36 | WARNING  | smart_complaint.app.services.escalation_service.escalation_service:85 | Complaint #999 escalated to admin (48h+)
+2026-06-23 20:08:36 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:99 | Escalation run complete: {'notified': 0, 'escalated': 1, 'critical': 0}
+2026-06-23 20:08:36 | WARNING  | smart_complaint.app.services.escalation_service.escalation_service:73 | Complaint #999 escalated to CRITICAL (72h+)
+2026-06-23 20:08:36 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:99 | Escalation run complete: {'notified': 0, 'escalated': 0, 'critical': 1}
+2026-06-23 20:08:36 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:99 | Escalation run complete: {'notified': 0, 'escalated': 0, 'critical': 0}
+2026-06-23 20:08:36 | WARNING  | smart_complaint.app.services.escalation_service.escalation_service:73 | Complaint #999 escalated to CRITICAL (72h+)
+2026-06-23 20:08:36 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:99 | Escalation run complete: {'notified': 0, 'escalated': 0, 'critical': 1}
+2026-06-23 20:08:36 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:96 | Complaint #999 flagged for staff notification (24h+)
+2026-06-23 20:08:36 | WARNING  | smart_complaint.app.services.escalation_service.escalation_service:85 | Complaint #999 escalated to admin (48h+)
+2026-06-23 20:08:36 | WARNING  | smart_complaint.app.services.escalation_service.escalation_service:73 | Complaint #999 escalated to CRITICAL (72h+)
+2026-06-23 20:08:36 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:99 | Escalation run complete: {'notified': 1, 'escalated': 1, 'critical': 1}
+2026-06-23 20:08:36 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:96 | Complaint #999 flagged for staff notification (24h+)
+2026-06-23 20:08:36 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:99 | Escalation run complete: {'notified': 1, 'escalated': 0, 'critical': 0}
+2026-06-23 20:08:36 | WARNING  | smart_complaint.app.services.escalation_service.escalation_service:73 | Complaint #999 escalated to CRITICAL (72h+)
+2026-06-23 20:08:36 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:99 | Escalation run complete: {'notified': 0, 'escalated': 0, 'critical': 1}
+2026-06-23 20:08:36 | INFO     | smart_complaint.app.main.main:29 | Starting SmartComplaintManager v1.0.0 [development]
+2026-06-23 20:08:36 | INFO     | smart_complaint.app.database.database:83 | Database tables created / verified.
+2026-06-23 20:08:36 | INFO     | smart_complaint.app.services.scheduler.scheduler:46 | Escalation scheduler started (interval=5 min)
+2026-06-23 20:08:38 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:99 | Escalation run complete: {'notified': 0, 'escalated': 0, 'critical': 0}
+2026-06-23 20:08:38 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:99 | Escalation run complete: {'notified': 0, 'escalated': 0, 'critical': 0}
+2026-06-23 20:08:39 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:99 | Escalation run complete: {'notified': 0, 'escalated': 0, 'critical': 0}
+2026-06-23 20:08:41 | INFO     | smart_complaint.app.database.database:91 | Database connection verified.
+2026-06-23 20:08:41 | INFO     | smart_complaint.app.services.scheduler.scheduler:53 | Escalation scheduler stopped.
+2026-06-23 20:08:41 | INFO     | smart_complaint.app.main.main:49 | Shutting down SmartComplaintManager
+2026-06-23 20:08:51 | INFO     | smart_complaint.logging_config:62 | Logging initialized — level=DEBUG, file=logs/app.log
+2026-06-23 20:08:53 | INFO     | smart_complaint.app.main.main:114 | Application created successfully.
+2026-06-23 20:08:53 | INFO     | smart_complaint.app.main.main:29 | Starting SmartComplaintManager v1.0.0 [development]
+2026-06-23 20:08:53 | INFO     | smart_complaint.app.database.database:83 | Database tables created / verified.
+2026-06-23 20:08:53 | INFO     | smart_complaint.app.services.scheduler.scheduler:46 | Escalation scheduler started (interval=5 min)
+2026-06-23 20:08:54 | INFO     | smart_complaint.app.services.scheduler.scheduler:53 | Escalation scheduler stopped.
+2026-06-23 20:08:54 | INFO     | smart_complaint.app.main.main:49 | Shutting down SmartComplaintManager
+2026-06-23 20:08:54 | INFO     | smart_complaint.app.main.main:29 | Starting SmartComplaintManager v1.0.0 [development]
+2026-06-23 20:08:54 | INFO     | smart_complaint.app.database.database:83 | Database tables created / verified.
+2026-06-23 20:08:54 | INFO     | smart_complaint.app.services.scheduler.scheduler:46 | Escalation scheduler started (interval=5 min)
+2026-06-23 20:08:57 | INFO     | smart_complaint.app.services.scheduler.scheduler:53 | Escalation scheduler stopped.
+2026-06-23 20:08:57 | INFO     | smart_complaint.app.main.main:49 | Shutting down SmartComplaintManager
+2026-06-23 20:08:57 | INFO     | smart_complaint.app.main.main:29 | Starting SmartComplaintManager v1.0.0 [development]
+2026-06-23 20:08:57 | INFO     | smart_complaint.app.database.database:83 | Database tables created / verified.
+2026-06-23 20:08:57 | INFO     | smart_complaint.app.services.scheduler.scheduler:46 | Escalation scheduler started (interval=5 min)
+2026-06-23 20:08:58 | INFO     | smart_complaint.app.services.scheduler.scheduler:53 | Escalation scheduler stopped.
+2026-06-23 20:08:58 | INFO     | smart_complaint.app.main.main:49 | Shutting down SmartComplaintManager
+2026-06-23 20:08:58 | INFO     | smart_complaint.app.main.main:29 | Starting SmartComplaintManager v1.0.0 [development]
+2026-06-23 20:08:58 | INFO     | smart_complaint.app.database.database:83 | Database tables created / verified.
+2026-06-23 20:08:58 | INFO     | smart_complaint.app.services.scheduler.scheduler:46 | Escalation scheduler started (interval=5 min)
+2026-06-23 20:08:59 | INFO     | smart_complaint.app.services.scheduler.scheduler:53 | Escalation scheduler stopped.
+2026-06-23 20:08:59 | INFO     | smart_complaint.app.main.main:49 | Shutting down SmartComplaintManager
+2026-06-23 20:08:59 | INFO     | smart_complaint.app.main.main:29 | Starting SmartComplaintManager v1.0.0 [development]
+2026-06-23 20:08:59 | INFO     | smart_complaint.app.database.database:83 | Database tables created / verified.
+2026-06-23 20:08:59 | INFO     | smart_complaint.app.services.scheduler.scheduler:46 | Escalation scheduler started (interval=5 min)
+2026-06-23 20:09:01 | INFO     | smart_complaint.app.services.scheduler.scheduler:53 | Escalation scheduler stopped.
+2026-06-23 20:09:01 | INFO     | smart_complaint.app.main.main:49 | Shutting down SmartComplaintManager
+2026-06-23 20:09:01 | INFO     | smart_complaint.app.main.main:29 | Starting SmartComplaintManager v1.0.0 [development]
+2026-06-23 20:09:01 | INFO     | smart_complaint.app.database.database:83 | Database tables created / verified.
+2026-06-23 20:09:01 | INFO     | smart_complaint.app.services.scheduler.scheduler:46 | Escalation scheduler started (interval=5 min)
+2026-06-23 20:09:01 | INFO     | smart_complaint.app.database.database:91 | Database connection verified.
+2026-06-23 20:09:01 | INFO     | smart_complaint.app.database.database:91 | Database connection verified.
+2026-06-23 20:09:01 | INFO     | smart_complaint.app.database.database:91 | Database connection verified.
+2026-06-23 20:09:01 | INFO     | smart_complaint.app.database.database:91 | Database connection verified.
+2026-06-23 20:09:01 | INFO     | smart_complaint.app.services.scheduler.scheduler:53 | Escalation scheduler stopped.
+2026-06-23 20:09:01 | INFO     | smart_complaint.app.main.main:49 | Shutting down SmartComplaintManager
+2026-06-23 20:25:47 | INFO     | smart_complaint.logging_config:62 | Logging initialized — level=DEBUG, file=logs/app.log
+2026-06-23 20:25:51 | INFO     | smart_complaint.app.main.main:114 | Application created successfully.
+2026-06-23 20:25:51 | INFO     | smart_complaint.app.main.main:29 | Starting SmartComplaintManager v1.0.0 [development]
+2026-06-23 20:25:52 | INFO     | smart_complaint.app.database.database:83 | Database tables created / verified.
+2026-06-23 20:25:52 | INFO     | smart_complaint.app.services.scheduler.scheduler:46 | Escalation scheduler started (interval=5 min)
+2026-06-23 20:25:54 | INFO     | smart_complaint.app.services.scheduler.scheduler:53 | Escalation scheduler stopped.
+2026-06-23 20:25:54 | INFO     | smart_complaint.app.main.main:49 | Shutting down SmartComplaintManager
+2026-06-23 20:25:54 | INFO     | smart_complaint.app.main.main:29 | Starting SmartComplaintManager v1.0.0 [development]
+2026-06-23 20:25:54 | INFO     | smart_complaint.app.database.database:83 | Database tables created / verified.
+2026-06-23 20:25:54 | INFO     | smart_complaint.app.services.scheduler.scheduler:46 | Escalation scheduler started (interval=5 min)
+2026-06-23 20:25:57 | INFO     | smart_complaint.app.services.scheduler.scheduler:53 | Escalation scheduler stopped.
+2026-06-23 20:25:57 | INFO     | smart_complaint.app.main.main:49 | Shutting down SmartComplaintManager
+2026-06-23 20:25:57 | INFO     | smart_complaint.app.main.main:29 | Starting SmartComplaintManager v1.0.0 [development]
+2026-06-23 20:25:57 | INFO     | smart_complaint.app.database.database:83 | Database tables created / verified.
+2026-06-23 20:25:57 | INFO     | smart_complaint.app.services.scheduler.scheduler:46 | Escalation scheduler started (interval=5 min)
+2026-06-23 20:25:59 | INFO     | smart_complaint.app.services.scheduler.scheduler:53 | Escalation scheduler stopped.
+2026-06-23 20:25:59 | INFO     | smart_complaint.app.main.main:49 | Shutting down SmartComplaintManager
+2026-06-23 20:25:59 | INFO     | smart_complaint.app.main.main:29 | Starting SmartComplaintManager v1.0.0 [development]
+2026-06-23 20:25:59 | INFO     | smart_complaint.app.database.database:83 | Database tables created / verified.
+2026-06-23 20:25:59 | INFO     | smart_complaint.app.services.scheduler.scheduler:46 | Escalation scheduler started (interval=5 min)
+2026-06-23 20:26:00 | INFO     | smart_complaint.app.services.scheduler.scheduler:53 | Escalation scheduler stopped.
+2026-06-23 20:26:00 | INFO     | smart_complaint.app.main.main:49 | Shutting down SmartComplaintManager
+2026-06-23 20:26:00 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:99 | Escalation run complete: {'notified': 0, 'escalated': 0, 'critical': 0}
+2026-06-23 20:26:00 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:96 | Complaint #999 flagged for staff notification (24h+)
+2026-06-23 20:26:00 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:99 | Escalation run complete: {'notified': 1, 'escalated': 0, 'critical': 0}
+2026-06-23 20:26:00 | WARNING  | smart_complaint.app.services.escalation_service.escalation_service:85 | Complaint #999 escalated to admin (48h+)
+2026-06-23 20:26:00 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:99 | Escalation run complete: {'notified': 0, 'escalated': 1, 'critical': 0}
+2026-06-23 20:26:00 | WARNING  | smart_complaint.app.services.escalation_service.escalation_service:73 | Complaint #999 escalated to CRITICAL (72h+)
+2026-06-23 20:26:00 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:99 | Escalation run complete: {'notified': 0, 'escalated': 0, 'critical': 1}
+2026-06-23 20:26:00 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:99 | Escalation run complete: {'notified': 0, 'escalated': 0, 'critical': 0}
+2026-06-23 20:26:00 | WARNING  | smart_complaint.app.services.escalation_service.escalation_service:73 | Complaint #999 escalated to CRITICAL (72h+)
+2026-06-23 20:26:00 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:99 | Escalation run complete: {'notified': 0, 'escalated': 0, 'critical': 1}
+2026-06-23 20:26:00 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:96 | Complaint #999 flagged for staff notification (24h+)
+2026-06-23 20:26:00 | WARNING  | smart_complaint.app.services.escalation_service.escalation_service:85 | Complaint #999 escalated to admin (48h+)
+2026-06-23 20:26:00 | WARNING  | smart_complaint.app.services.escalation_service.escalation_service:73 | Complaint #999 escalated to CRITICAL (72h+)
+2026-06-23 20:26:00 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:99 | Escalation run complete: {'notified': 1, 'escalated': 1, 'critical': 1}
+2026-06-23 20:26:00 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:96 | Complaint #999 flagged for staff notification (24h+)
+2026-06-23 20:26:00 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:99 | Escalation run complete: {'notified': 1, 'escalated': 0, 'critical': 0}
+2026-06-23 20:26:00 | WARNING  | smart_complaint.app.services.escalation_service.escalation_service:73 | Complaint #999 escalated to CRITICAL (72h+)
+2026-06-23 20:26:00 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:99 | Escalation run complete: {'notified': 0, 'escalated': 0, 'critical': 1}
+2026-06-23 20:26:00 | INFO     | smart_complaint.app.main.main:29 | Starting SmartComplaintManager v1.0.0 [development]
+2026-06-23 20:26:00 | INFO     | smart_complaint.app.database.database:83 | Database tables created / verified.
+2026-06-23 20:26:00 | INFO     | smart_complaint.app.services.scheduler.scheduler:46 | Escalation scheduler started (interval=5 min)
+2026-06-23 20:26:03 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:99 | Escalation run complete: {'notified': 0, 'escalated': 0, 'critical': 0}
+2026-06-23 20:26:03 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:99 | Escalation run complete: {'notified': 0, 'escalated': 0, 'critical': 0}
+2026-06-23 20:26:03 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:99 | Escalation run complete: {'notified': 0, 'escalated': 0, 'critical': 0}
+2026-06-23 20:26:04 | INFO     | smart_complaint.app.database.database:91 | Database connection verified.
+2026-06-23 20:26:04 | INFO     | smart_complaint.app.services.scheduler.scheduler:53 | Escalation scheduler stopped.
+2026-06-23 20:26:04 | INFO     | smart_complaint.app.main.main:49 | Shutting down SmartComplaintManager
+2026-06-23 20:26:04 | INFO     | smart_complaint.app.main.main:29 | Starting SmartComplaintManager v1.0.0 [development]
+2026-06-23 20:26:04 | INFO     | smart_complaint.app.database.database:83 | Database tables created / verified.
+2026-06-23 20:26:04 | INFO     | smart_complaint.app.services.scheduler.scheduler:46 | Escalation scheduler started (interval=5 min)
+2026-06-23 20:26:04 | INFO     | smart_complaint.app.database.database:91 | Database connection verified.
+2026-06-23 20:26:04 | INFO     | smart_complaint.app.database.database:91 | Database connection verified.
+2026-06-23 20:26:04 | INFO     | smart_complaint.app.database.database:91 | Database connection verified.
+2026-06-23 20:26:04 | INFO     | smart_complaint.app.database.database:91 | Database connection verified.
+2026-06-23 20:26:04 | INFO     | smart_complaint.app.services.scheduler.scheduler:53 | Escalation scheduler stopped.
+2026-06-23 20:26:04 | INFO     | smart_complaint.app.main.main:49 | Shutting down SmartComplaintManager
+2026-06-23 20:44:30 | INFO     | smart_complaint.logging_config:62 | Logging initialized — level=DEBUG, file=logs/app.log
+2026-06-23 20:44:37 | INFO     | smart_complaint.app.main.main:116 | Application created successfully.
+2026-06-23 20:44:39 | INFO     | smart_complaint.app.main.main:29 | Starting SmartComplaintManager v1.0.0 [development]
+2026-06-23 20:44:39 | INFO     | smart_complaint.app.database.database:83 | Database tables created / verified.
+2026-06-23 20:44:39 | INFO     | smart_complaint.app.services.scheduler.scheduler:46 | Escalation scheduler started (interval=5 min)
+2026-06-23 20:44:44 | INFO     | smart_complaint.app.database.database:91 | Database connection verified.
+2026-06-23 20:44:49 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:99 | Escalation run complete: {'notified': 0, 'escalated': 0, 'critical': 0}
+2026-06-23 20:44:50 | INFO     | smart_complaint.app.services.scheduler.scheduler:53 | Escalation scheduler stopped.
+2026-06-23 20:44:50 | INFO     | smart_complaint.app.main.main:49 | Shutting down SmartComplaintManager
+2026-06-23 20:45:14 | INFO     | smart_complaint.logging_config:62 | Logging initialized — level=DEBUG, file=logs/app.log
+2026-06-23 20:45:16 | INFO     | smart_complaint.app.main.main:116 | Application created successfully.
+2026-06-23 20:45:16 | INFO     | smart_complaint.app.main.main:29 | Starting SmartComplaintManager v1.0.0 [development]
+2026-06-23 20:45:16 | INFO     | smart_complaint.app.database.database:83 | Database tables created / verified.
+2026-06-23 20:45:16 | INFO     | smart_complaint.app.services.scheduler.scheduler:46 | Escalation scheduler started (interval=5 min)
+2026-06-23 20:45:19 | INFO     | smart_complaint.app.database.database:91 | Database connection verified.
+2026-06-23 20:45:22 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:99 | Escalation run complete: {'notified': 0, 'escalated': 0, 'critical': 0}
+2026-06-23 20:45:22 | INFO     | smart_complaint.app.services.scheduler.scheduler:53 | Escalation scheduler stopped.
+2026-06-23 20:45:22 | INFO     | smart_complaint.app.main.main:49 | Shutting down SmartComplaintManager
+2026-06-23 20:45:33 | INFO     | smart_complaint.logging_config:62 | Logging initialized — level=DEBUG, file=logs/app.log
+2026-06-23 20:45:35 | INFO     | smart_complaint.app.main.main:116 | Application created successfully.
+2026-06-23 20:45:36 | INFO     | smart_complaint.app.main.main:29 | Starting SmartComplaintManager v1.0.0 [development]
+2026-06-23 20:45:36 | INFO     | smart_complaint.app.database.database:83 | Database tables created / verified.
+2026-06-23 20:45:36 | INFO     | smart_complaint.app.services.scheduler.scheduler:46 | Escalation scheduler started (interval=5 min)
+2026-06-23 20:45:39 | INFO     | smart_complaint.app.database.database:91 | Database connection verified.
+2026-06-23 20:45:41 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:99 | Escalation run complete: {'notified': 0, 'escalated': 0, 'critical': 0}
+2026-06-23 20:45:42 | INFO     | smart_complaint.app.services.scheduler.scheduler:53 | Escalation scheduler stopped.
+2026-06-23 20:45:42 | INFO     | smart_complaint.app.main.main:49 | Shutting down SmartComplaintManager
+2026-06-23 20:45:42 | INFO     | smart_complaint.app.main.main:29 | Starting SmartComplaintManager v1.0.0 [development]
+2026-06-23 20:45:42 | INFO     | smart_complaint.app.database.database:83 | Database tables created / verified.
+2026-06-23 20:45:42 | INFO     | smart_complaint.app.services.scheduler.scheduler:46 | Escalation scheduler started (interval=5 min)
+2026-06-23 20:45:43 | INFO     | smart_complaint.app.services.scheduler.scheduler:53 | Escalation scheduler stopped.
+2026-06-23 20:45:43 | INFO     | smart_complaint.app.main.main:49 | Shutting down SmartComplaintManager
+2026-06-23 20:45:43 | INFO     | smart_complaint.app.main.main:29 | Starting SmartComplaintManager v1.0.0 [development]
+2026-06-23 20:45:43 | INFO     | smart_complaint.app.database.database:83 | Database tables created / verified.
+2026-06-23 20:45:43 | INFO     | smart_complaint.app.services.scheduler.scheduler:46 | Escalation scheduler started (interval=5 min)
+2026-06-23 20:45:44 | INFO     | smart_complaint.app.services.scheduler.scheduler:53 | Escalation scheduler stopped.
+2026-06-23 20:45:44 | INFO     | smart_complaint.app.main.main:49 | Shutting down SmartComplaintManager
+2026-06-23 20:45:44 | INFO     | smart_complaint.app.main.main:29 | Starting SmartComplaintManager v1.0.0 [development]
+2026-06-23 20:45:44 | INFO     | smart_complaint.app.database.database:83 | Database tables created / verified.
+2026-06-23 20:45:44 | INFO     | smart_complaint.app.services.scheduler.scheduler:46 | Escalation scheduler started (interval=5 min)
+2026-06-23 20:45:46 | INFO     | smart_complaint.app.services.scheduler.scheduler:53 | Escalation scheduler stopped.
+2026-06-23 20:45:46 | INFO     | smart_complaint.app.main.main:49 | Shutting down SmartComplaintManager
+2026-06-23 20:45:46 | INFO     | smart_complaint.app.main.main:29 | Starting SmartComplaintManager v1.0.0 [development]
+2026-06-23 20:45:46 | INFO     | smart_complaint.app.database.database:83 | Database tables created / verified.
+2026-06-23 20:45:46 | INFO     | smart_complaint.app.services.scheduler.scheduler:46 | Escalation scheduler started (interval=5 min)
+2026-06-23 20:45:47 | INFO     | smart_complaint.app.services.scheduler.scheduler:53 | Escalation scheduler stopped.
+2026-06-23 20:45:47 | INFO     | smart_complaint.app.main.main:49 | Shutting down SmartComplaintManager
+2026-06-23 20:45:47 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:99 | Escalation run complete: {'notified': 0, 'escalated': 0, 'critical': 0}
+2026-06-23 20:45:47 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:96 | Complaint #999 flagged for staff notification (24h+)
+2026-06-23 20:45:47 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:99 | Escalation run complete: {'notified': 1, 'escalated': 0, 'critical': 0}
+2026-06-23 20:45:47 | WARNING  | smart_complaint.app.services.escalation_service.escalation_service:85 | Complaint #999 escalated to admin (48h+)
+2026-06-23 20:45:47 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:99 | Escalation run complete: {'notified': 0, 'escalated': 1, 'critical': 0}
+2026-06-23 20:45:47 | WARNING  | smart_complaint.app.services.escalation_service.escalation_service:73 | Complaint #999 escalated to CRITICAL (72h+)
+2026-06-23 20:45:47 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:99 | Escalation run complete: {'notified': 0, 'escalated': 0, 'critical': 1}
+2026-06-23 20:45:47 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:99 | Escalation run complete: {'notified': 0, 'escalated': 0, 'critical': 0}
+2026-06-23 20:45:47 | WARNING  | smart_complaint.app.services.escalation_service.escalation_service:73 | Complaint #999 escalated to CRITICAL (72h+)
+2026-06-23 20:45:47 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:99 | Escalation run complete: {'notified': 0, 'escalated': 0, 'critical': 1}
+2026-06-23 20:45:47 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:96 | Complaint #999 flagged for staff notification (24h+)
+2026-06-23 20:45:47 | WARNING  | smart_complaint.app.services.escalation_service.escalation_service:85 | Complaint #999 escalated to admin (48h+)
+2026-06-23 20:45:47 | WARNING  | smart_complaint.app.services.escalation_service.escalation_service:73 | Complaint #999 escalated to CRITICAL (72h+)
+2026-06-23 20:45:47 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:99 | Escalation run complete: {'notified': 1, 'escalated': 1, 'critical': 1}
+2026-06-23 20:45:47 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:96 | Complaint #999 flagged for staff notification (24h+)
+2026-06-23 20:45:47 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:99 | Escalation run complete: {'notified': 1, 'escalated': 0, 'critical': 0}
+2026-06-23 20:45:47 | WARNING  | smart_complaint.app.services.escalation_service.escalation_service:73 | Complaint #999 escalated to CRITICAL (72h+)
+2026-06-23 20:45:47 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:99 | Escalation run complete: {'notified': 0, 'escalated': 0, 'critical': 1}
+2026-06-23 20:45:47 | INFO     | smart_complaint.app.main.main:29 | Starting SmartComplaintManager v1.0.0 [development]
+2026-06-23 20:45:47 | INFO     | smart_complaint.app.database.database:83 | Database tables created / verified.
+2026-06-23 20:45:47 | INFO     | smart_complaint.app.services.scheduler.scheduler:46 | Escalation scheduler started (interval=5 min)
+2026-06-23 20:45:49 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:99 | Escalation run complete: {'notified': 0, 'escalated': 0, 'critical': 0}
+2026-06-23 20:45:50 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:99 | Escalation run complete: {'notified': 0, 'escalated': 0, 'critical': 0}
+2026-06-23 20:45:50 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:99 | Escalation run complete: {'notified': 0, 'escalated': 0, 'critical': 0}
+2026-06-23 20:45:51 | INFO     | smart_complaint.app.database.database:91 | Database connection verified.
+2026-06-23 20:45:51 | INFO     | smart_complaint.app.services.scheduler.scheduler:53 | Escalation scheduler stopped.
+2026-06-23 20:45:51 | INFO     | smart_complaint.app.main.main:49 | Shutting down SmartComplaintManager
+2026-06-23 20:45:51 | INFO     | smart_complaint.app.main.main:29 | Starting SmartComplaintManager v1.0.0 [development]
+2026-06-23 20:45:51 | INFO     | smart_complaint.app.database.database:83 | Database tables created / verified.
+2026-06-23 20:45:51 | INFO     | smart_complaint.app.services.scheduler.scheduler:46 | Escalation scheduler started (interval=5 min)
+2026-06-23 20:45:51 | INFO     | smart_complaint.app.database.database:91 | Database connection verified.
+2026-06-23 20:45:51 | INFO     | smart_complaint.app.database.database:91 | Database connection verified.
+2026-06-23 20:45:51 | INFO     | smart_complaint.app.database.database:91 | Database connection verified.
+2026-06-23 20:45:51 | INFO     | smart_complaint.app.database.database:91 | Database connection verified.
+2026-06-23 20:45:51 | INFO     | smart_complaint.app.services.scheduler.scheduler:53 | Escalation scheduler stopped.
+2026-06-23 20:45:51 | INFO     | smart_complaint.app.main.main:49 | Shutting down SmartComplaintManager
+2026-06-23 20:48:00 | INFO     | smart_complaint.logging_config:62 | Logging initialized — level=DEBUG, file=logs/app.log
+2026-06-23 20:48:03 | INFO     | smart_complaint.app.main.main:116 | Application created successfully.
+2026-06-23 20:48:03 | INFO     | smart_complaint.app.main.main:29 | Starting SmartComplaintManager v1.0.0 [development]
+2026-06-23 20:48:03 | INFO     | smart_complaint.app.database.database:83 | Database tables created / verified.
+2026-06-23 20:48:03 | INFO     | smart_complaint.app.services.scheduler.scheduler:46 | Escalation scheduler started (interval=5 min)
+2026-06-23 20:51:06 | INFO     | smart_complaint.app.services.scheduler.scheduler:53 | Escalation scheduler stopped.
+2026-06-23 20:51:06 | INFO     | smart_complaint.app.main.main:49 | Shutting down SmartComplaintManager
+2026-06-23 20:51:08 | INFO     | smart_complaint.logging_config:62 | Logging initialized — level=DEBUG, file=logs/app.log
+2026-06-23 20:51:10 | INFO     | smart_complaint.app.main.main:119 | Application created successfully.
+2026-06-23 20:51:10 | INFO     | smart_complaint.app.main.main:30 | Starting SmartComplaintManager v1.0.0 [development]
+2026-06-23 20:51:11 | INFO     | smart_complaint.app.database.database:83 | Database tables created / verified.
+2026-06-23 20:51:11 | INFO     | smart_complaint.app.services.scheduler.scheduler:46 | Escalation scheduler started (interval=5 min)
+2026-06-23 20:51:22 | INFO     | smart_complaint.logging_config:62 | Logging initialized — level=DEBUG, file=logs/app.log
+2026-06-23 20:51:25 | INFO     | smart_complaint.app.main.main:119 | Application created successfully.
+2026-06-23 20:54:45 | INFO     | smart_complaint.logging_config:62 | Logging initialized — level=DEBUG, file=logs/app.log
+2026-06-23 20:54:47 | INFO     | smart_complaint.app.main.main:119 | Application created successfully.
+2026-06-23 20:56:11 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:99 | Escalation run complete: {'notified': 0, 'escalated': 0, 'critical': 0}
+2026-06-23 20:56:11 | INFO     | smart_complaint.app.services.scheduler.scheduler:23 | Scheduled escalation job result: {'notified': 0, 'escalated': 0, 'critical': 0}
+2026-06-23 20:56:41 | INFO     | smart_complaint.app.services.scheduler.scheduler:53 | Escalation scheduler stopped.
+2026-06-23 20:56:41 | INFO     | smart_complaint.app.main.main:50 | Shutting down SmartComplaintManager
+2026-06-23 20:57:01 | INFO     | smart_complaint.logging_config:62 | Logging initialized — level=DEBUG, file=logs/app.log
+2026-06-23 20:57:03 | INFO     | smart_complaint.app.main.main:119 | Application created successfully.
+2026-06-23 20:57:03 | INFO     | smart_complaint.app.main.main:30 | Starting SmartComplaintManager v1.0.0 [development]
+2026-06-23 20:57:03 | INFO     | smart_complaint.app.database.database:83 | Database tables created / verified.
+2026-06-23 20:57:03 | INFO     | smart_complaint.app.services.scheduler.scheduler:46 | Escalation scheduler started (interval=5 min)
+2026-06-23 20:57:04 | INFO     | smart_complaint.app.services.scheduler.scheduler:53 | Escalation scheduler stopped.
+2026-06-23 20:57:04 | INFO     | smart_complaint.app.main.main:50 | Shutting down SmartComplaintManager
+2026-06-23 20:58:22 | INFO     | smart_complaint.logging_config:62 | Logging initialized — level=DEBUG, file=logs/app.log
+2026-06-23 20:58:24 | INFO     | smart_complaint.app.main.main:119 | Application created successfully.
+2026-06-23 20:58:24 | INFO     | smart_complaint.app.main.main:30 | Starting SmartComplaintManager v1.0.0 [development]
+2026-06-23 20:58:24 | INFO     | smart_complaint.app.database.database:83 | Database tables created / verified.
+2026-06-23 20:58:24 | INFO     | smart_complaint.app.services.scheduler.scheduler:46 | Escalation scheduler started (interval=5 min)
+2026-06-23 20:58:26 | INFO     | smart_complaint.app.services.scheduler.scheduler:53 | Escalation scheduler stopped.
+2026-06-23 20:58:26 | INFO     | smart_complaint.app.main.main:50 | Shutting down SmartComplaintManager
+2026-06-23 20:58:51 | INFO     | smart_complaint.logging_config:62 | Logging initialized — level=DEBUG, file=logs/app.log
+2026-06-23 20:58:53 | INFO     | smart_complaint.app.main.main:119 | Application created successfully.
+2026-06-23 20:58:53 | INFO     | smart_complaint.app.main.main:30 | Starting SmartComplaintManager v1.0.0 [development]
+2026-06-23 20:58:53 | INFO     | smart_complaint.app.database.database:83 | Database tables created / verified.
+2026-06-23 20:58:53 | INFO     | smart_complaint.app.services.scheduler.scheduler:46 | Escalation scheduler started (interval=5 min)
+2026-06-23 21:03:53 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:99 | Escalation run complete: {'notified': 0, 'escalated': 0, 'critical': 0}
+2026-06-23 21:03:53 | INFO     | smart_complaint.app.services.scheduler.scheduler:23 | Scheduled escalation job result: {'notified': 0, 'escalated': 0, 'critical': 0}
+2026-06-23 21:08:53 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:99 | Escalation run complete: {'notified': 0, 'escalated': 0, 'critical': 0}
+2026-06-23 21:08:53 | INFO     | smart_complaint.app.services.scheduler.scheduler:23 | Scheduled escalation job result: {'notified': 0, 'escalated': 0, 'critical': 0}
+2026-06-23 21:27:43 | INFO     | smart_complaint.app.services.scheduler.scheduler:53 | Escalation scheduler stopped.
+2026-06-23 21:27:43 | INFO     | smart_complaint.app.main.main:50 | Shutting down SmartComplaintManager
+2026-06-24 10:13:09 | INFO     | smart_complaint.logging_config:62 | Logging initialized — level=DEBUG, file=logs/app.log
+2026-06-24 10:13:22 | INFO     | smart_complaint.app.main.main:119 | Application created successfully.
+2026-06-24 10:13:22 | INFO     | smart_complaint.app.main.main:30 | Starting SmartComplaintManager v1.0.0 [development]
+2026-06-24 10:13:23 | INFO     | smart_complaint.app.database.database:83 | Database tables created / verified.
+2026-06-24 10:13:23 | INFO     | smart_complaint.app.services.scheduler.scheduler:46 | Escalation scheduler started (interval=5 min)
+2026-06-24 10:18:16 | INFO     | smart_complaint.app.services.scheduler.scheduler:53 | Escalation scheduler stopped.
+2026-06-24 10:18:16 | INFO     | smart_complaint.app.main.main:50 | Shutting down SmartComplaintManager
+2026-06-24 10:24:20 | INFO     | smart_complaint.logging_config:62 | Logging initialized — level=DEBUG, file=logs/app.log
+2026-06-24 10:24:23 | INFO     | smart_complaint.app.main.main:119 | Application created successfully.
+2026-06-24 10:24:23 | INFO     | smart_complaint.app.main.main:30 | Starting SmartComplaintManager v1.0.0 [development]
+2026-06-24 10:24:24 | INFO     | smart_complaint.app.database.database:83 | Database tables created / verified.
+2026-06-24 10:24:24 | INFO     | smart_complaint.app.services.scheduler.scheduler:46 | Escalation scheduler started (interval=5 min)
+2026-06-24 10:24:25 | INFO     | smart_complaint.app.services.scheduler.scheduler:53 | Escalation scheduler stopped.
+2026-06-24 10:24:25 | INFO     | smart_complaint.app.main.main:50 | Shutting down SmartComplaintManager
+2026-06-24 10:24:25 | INFO     | smart_complaint.app.main.main:30 | Starting SmartComplaintManager v1.0.0 [development]
+2026-06-24 10:24:25 | INFO     | smart_complaint.app.database.database:83 | Database tables created / verified.
+2026-06-24 10:24:25 | INFO     | smart_complaint.app.services.scheduler.scheduler:46 | Escalation scheduler started (interval=5 min)
+2026-06-24 10:24:27 | INFO     | smart_complaint.app.services.scheduler.scheduler:53 | Escalation scheduler stopped.
+2026-06-24 10:24:27 | INFO     | smart_complaint.app.main.main:50 | Shutting down SmartComplaintManager
+2026-06-24 10:26:46 | INFO     | smart_complaint.logging_config:62 | Logging initialized — level=DEBUG, file=logs/app.log
+2026-06-24 10:26:48 | INFO     | smart_complaint.app.main.main:119 | Application created successfully.
+2026-06-24 10:26:48 | INFO     | smart_complaint.app.main.main:30 | Starting SmartComplaintManager v1.0.0 [development]
+2026-06-24 10:26:48 | INFO     | smart_complaint.app.database.database:83 | Database tables created / verified.
+2026-06-24 10:26:49 | INFO     | smart_complaint.app.services.scheduler.scheduler:46 | Escalation scheduler started (interval=5 min)
+2026-06-24 10:28:16 | INFO     | smart_complaint.app.services.scheduler.scheduler:53 | Escalation scheduler stopped.
+2026-06-24 10:28:16 | INFO     | smart_complaint.app.main.main:50 | Shutting down SmartComplaintManager
+2026-06-24 10:29:57 | INFO     | smart_complaint.logging_config:62 | Logging initialized — level=DEBUG, file=logs/app.log
+2026-06-24 10:29:59 | INFO     | smart_complaint.app.main.main:119 | Application created successfully.
+2026-06-24 10:29:59 | INFO     | smart_complaint.app.main.main:30 | Starting SmartComplaintManager v1.0.0 [development]
+2026-06-24 10:29:59 | INFO     | smart_complaint.app.database.database:83 | Database tables created / verified.
+2026-06-24 10:29:59 | INFO     | smart_complaint.app.services.scheduler.scheduler:46 | Escalation scheduler started (interval=5 min)
+2026-06-24 10:30:01 | INFO     | smart_complaint.app.services.scheduler.scheduler:53 | Escalation scheduler stopped.
+2026-06-24 10:30:01 | INFO     | smart_complaint.app.main.main:50 | Shutting down SmartComplaintManager
+2026-06-24 10:31:23 | INFO     | smart_complaint.logging_config:62 | Logging initialized — level=DEBUG, file=logs/app.log
+2026-06-24 10:31:25 | INFO     | smart_complaint.app.main.main:119 | Application created successfully.
+2026-06-24 10:31:25 | INFO     | smart_complaint.app.main.main:30 | Starting SmartComplaintManager v1.0.0 [development]
+2026-06-24 10:31:25 | INFO     | smart_complaint.app.database.database:83 | Database tables created / verified.
+2026-06-24 10:31:25 | INFO     | smart_complaint.app.services.scheduler.scheduler:46 | Escalation scheduler started (interval=5 min)
+2026-06-24 10:31:27 | INFO     | smart_complaint.app.services.scheduler.scheduler:53 | Escalation scheduler stopped.
+2026-06-24 10:31:27 | INFO     | smart_complaint.app.main.main:50 | Shutting down SmartComplaintManager
+2026-06-24 10:31:27 | INFO     | smart_complaint.app.main.main:30 | Starting SmartComplaintManager v1.0.0 [development]
+2026-06-24 10:31:27 | INFO     | smart_complaint.app.database.database:83 | Database tables created / verified.
+2026-06-24 10:31:27 | INFO     | smart_complaint.app.services.scheduler.scheduler:46 | Escalation scheduler started (interval=5 min)
+2026-06-24 10:31:28 | INFO     | smart_complaint.app.services.scheduler.scheduler:53 | Escalation scheduler stopped.
+2026-06-24 10:31:28 | INFO     | smart_complaint.app.main.main:50 | Shutting down SmartComplaintManager
+2026-06-24 10:31:44 | INFO     | smart_complaint.logging_config:62 | Logging initialized — level=DEBUG, file=logs/app.log
+2026-06-24 10:31:46 | INFO     | smart_complaint.app.main.main:119 | Application created successfully.
+2026-06-24 10:31:46 | INFO     | smart_complaint.app.main.main:30 | Starting SmartComplaintManager v1.0.0 [development]
+2026-06-24 10:31:46 | INFO     | smart_complaint.app.database.database:83 | Database tables created / verified.
+2026-06-24 10:31:46 | INFO     | smart_complaint.app.services.scheduler.scheduler:46 | Escalation scheduler started (interval=5 min)
+2026-06-24 10:36:46 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:99 | Escalation run complete: {'notified': 0, 'escalated': 0, 'critical': 0}
+2026-06-24 10:36:46 | INFO     | smart_complaint.app.services.scheduler.scheduler:23 | Scheduled escalation job result: {'notified': 0, 'escalated': 0, 'critical': 0}
+2026-06-24 10:36:46 | INFO     | smart_complaint.app.services.scheduler.scheduler:53 | Escalation scheduler stopped.
+2026-06-24 10:36:46 | INFO     | smart_complaint.app.main.main:50 | Shutting down SmartComplaintManager
+2026-06-24 11:09:43 | INFO     | smart_complaint.logging_config:62 | Logging initialized — level=DEBUG, file=logs/app.log
+2026-06-24 11:09:45 | INFO     | smart_complaint.app.main.main:119 | Application created successfully.
+2026-06-24 11:21:11 | INFO     | smart_complaint.logging_config:62 | Logging initialized — level=DEBUG, file=logs/app.log
+2026-06-24 11:21:15 | INFO     | smart_complaint.app.main.main:119 | Application created successfully.
+2026-06-24 11:21:15 | INFO     | smart_complaint.app.main.main:30 | Starting SmartComplaintManager v1.0.0 [development]
+2026-06-24 11:21:15 | INFO     | smart_complaint.app.database.database:83 | Database tables created / verified.
+2026-06-24 11:21:15 | INFO     | smart_complaint.app.services.scheduler.scheduler:46 | Escalation scheduler started (interval=5 min)
+2026-06-24 11:21:18 | INFO     | smart_complaint.app.database.database:91 | Database connection verified.
+2026-06-24 11:21:22 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:99 | Escalation run complete: {'notified': 0, 'escalated': 0, 'critical': 0}
+2026-06-24 11:21:22 | INFO     | smart_complaint.app.services.scheduler.scheduler:53 | Escalation scheduler stopped.
+2026-06-24 11:21:22 | INFO     | smart_complaint.app.main.main:50 | Shutting down SmartComplaintManager
+2026-06-24 11:21:22 | INFO     | smart_complaint.app.main.main:30 | Starting SmartComplaintManager v1.0.0 [development]
+2026-06-24 11:21:22 | INFO     | smart_complaint.app.database.database:83 | Database tables created / verified.
+2026-06-24 11:21:22 | INFO     | smart_complaint.app.services.scheduler.scheduler:46 | Escalation scheduler started (interval=5 min)
+2026-06-24 11:21:23 | INFO     | smart_complaint.app.services.scheduler.scheduler:53 | Escalation scheduler stopped.
+2026-06-24 11:21:23 | INFO     | smart_complaint.app.main.main:50 | Shutting down SmartComplaintManager
+2026-06-24 11:21:23 | INFO     | smart_complaint.app.main.main:30 | Starting SmartComplaintManager v1.0.0 [development]
+2026-06-24 11:21:23 | INFO     | smart_complaint.app.database.database:83 | Database tables created / verified.
+2026-06-24 11:21:23 | INFO     | smart_complaint.app.services.scheduler.scheduler:46 | Escalation scheduler started (interval=5 min)
+2026-06-24 11:21:25 | INFO     | smart_complaint.app.services.scheduler.scheduler:53 | Escalation scheduler stopped.
+2026-06-24 11:21:25 | INFO     | smart_complaint.app.main.main:50 | Shutting down SmartComplaintManager
+2026-06-24 11:21:25 | INFO     | smart_complaint.app.main.main:30 | Starting SmartComplaintManager v1.0.0 [development]
+2026-06-24 11:21:25 | INFO     | smart_complaint.app.database.database:83 | Database tables created / verified.
+2026-06-24 11:21:25 | INFO     | smart_complaint.app.services.scheduler.scheduler:46 | Escalation scheduler started (interval=5 min)
+2026-06-24 11:21:26 | INFO     | smart_complaint.app.services.scheduler.scheduler:53 | Escalation scheduler stopped.
+2026-06-24 11:21:26 | INFO     | smart_complaint.app.main.main:50 | Shutting down SmartComplaintManager
+2026-06-24 11:21:26 | INFO     | smart_complaint.app.main.main:30 | Starting SmartComplaintManager v1.0.0 [development]
+2026-06-24 11:21:27 | INFO     | smart_complaint.app.database.database:83 | Database tables created / verified.
+2026-06-24 11:21:27 | INFO     | smart_complaint.app.services.scheduler.scheduler:46 | Escalation scheduler started (interval=5 min)
+2026-06-24 11:21:27 | INFO     | smart_complaint.app.services.scheduler.scheduler:53 | Escalation scheduler stopped.
+2026-06-24 11:21:27 | INFO     | smart_complaint.app.main.main:50 | Shutting down SmartComplaintManager
+2026-06-24 11:21:27 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:99 | Escalation run complete: {'notified': 0, 'escalated': 0, 'critical': 0}
+2026-06-24 11:21:27 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:96 | Complaint #999 flagged for staff notification (24h+)
+2026-06-24 11:21:27 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:99 | Escalation run complete: {'notified': 1, 'escalated': 0, 'critical': 0}
+2026-06-24 11:21:27 | WARNING  | smart_complaint.app.services.escalation_service.escalation_service:85 | Complaint #999 escalated to admin (48h+)
+2026-06-24 11:21:27 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:99 | Escalation run complete: {'notified': 0, 'escalated': 1, 'critical': 0}
+2026-06-24 11:21:27 | WARNING  | smart_complaint.app.services.escalation_service.escalation_service:73 | Complaint #999 escalated to CRITICAL (72h+)
+2026-06-24 11:21:27 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:99 | Escalation run complete: {'notified': 0, 'escalated': 0, 'critical': 1}
+2026-06-24 11:21:27 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:99 | Escalation run complete: {'notified': 0, 'escalated': 0, 'critical': 0}
+2026-06-24 11:21:27 | WARNING  | smart_complaint.app.services.escalation_service.escalation_service:73 | Complaint #999 escalated to CRITICAL (72h+)
+2026-06-24 11:21:27 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:99 | Escalation run complete: {'notified': 0, 'escalated': 0, 'critical': 1}
+2026-06-24 11:21:27 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:96 | Complaint #999 flagged for staff notification (24h+)
+2026-06-24 11:21:27 | WARNING  | smart_complaint.app.services.escalation_service.escalation_service:85 | Complaint #999 escalated to admin (48h+)
+2026-06-24 11:21:27 | WARNING  | smart_complaint.app.services.escalation_service.escalation_service:73 | Complaint #999 escalated to CRITICAL (72h+)
+2026-06-24 11:21:27 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:99 | Escalation run complete: {'notified': 1, 'escalated': 1, 'critical': 1}
+2026-06-24 11:21:27 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:96 | Complaint #999 flagged for staff notification (24h+)
+2026-06-24 11:21:27 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:99 | Escalation run complete: {'notified': 1, 'escalated': 0, 'critical': 0}
+2026-06-24 11:21:27 | WARNING  | smart_complaint.app.services.escalation_service.escalation_service:73 | Complaint #999 escalated to CRITICAL (72h+)
+2026-06-24 11:21:27 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:99 | Escalation run complete: {'notified': 0, 'escalated': 0, 'critical': 1}
+2026-06-24 11:21:27 | INFO     | smart_complaint.app.main.main:30 | Starting SmartComplaintManager v1.0.0 [development]
+2026-06-24 11:21:27 | INFO     | smart_complaint.app.database.database:83 | Database tables created / verified.
+2026-06-24 11:21:27 | INFO     | smart_complaint.app.services.scheduler.scheduler:46 | Escalation scheduler started (interval=5 min)
+2026-06-24 11:21:30 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:99 | Escalation run complete: {'notified': 0, 'escalated': 0, 'critical': 0}
+2026-06-24 11:21:30 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:99 | Escalation run complete: {'notified': 0, 'escalated': 0, 'critical': 0}
+2026-06-24 11:21:30 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:99 | Escalation run complete: {'notified': 0, 'escalated': 0, 'critical': 0}
+2026-06-24 11:21:31 | INFO     | smart_complaint.app.database.database:91 | Database connection verified.
+2026-06-24 11:21:31 | INFO     | smart_complaint.app.services.scheduler.scheduler:53 | Escalation scheduler stopped.
+2026-06-24 11:21:31 | INFO     | smart_complaint.app.main.main:50 | Shutting down SmartComplaintManager
+2026-06-24 11:21:31 | INFO     | smart_complaint.app.main.main:30 | Starting SmartComplaintManager v1.0.0 [development]
+2026-06-24 11:21:31 | INFO     | smart_complaint.app.database.database:83 | Database tables created / verified.
+2026-06-24 11:21:31 | INFO     | smart_complaint.app.services.scheduler.scheduler:46 | Escalation scheduler started (interval=5 min)
+2026-06-24 11:21:32 | INFO     | smart_complaint.app.database.database:91 | Database connection verified.
+2026-06-24 11:21:32 | INFO     | smart_complaint.app.database.database:91 | Database connection verified.
+2026-06-24 11:21:32 | INFO     | smart_complaint.app.database.database:91 | Database connection verified.
+2026-06-24 11:21:32 | INFO     | smart_complaint.app.database.database:91 | Database connection verified.
+2026-06-24 11:21:32 | INFO     | smart_complaint.app.services.scheduler.scheduler:53 | Escalation scheduler stopped.
+2026-06-24 11:21:32 | INFO     | smart_complaint.app.main.main:50 | Shutting down SmartComplaintManager
+2026-06-24 11:23:44 | INFO     | smart_complaint.logging_config:62 | Logging initialized — level=DEBUG, file=logs/app.log
+2026-06-24 11:23:48 | INFO     | smart_complaint.app.main.main:119 | Application created successfully.
+2026-06-24 11:23:48 | INFO     | smart_complaint.app.main.main:30 | Starting SmartComplaintManager v1.0.0 [development]
+2026-06-24 11:23:48 | INFO     | smart_complaint.app.database.database:83 | Database tables created / verified.
+2026-06-24 11:23:48 | INFO     | smart_complaint.app.services.scheduler.scheduler:46 | Escalation scheduler started (interval=5 min)
+2026-06-24 11:26:42 | INFO     | smart_complaint.logging_config:62 | Logging initialized — level=DEBUG, file=logs/app.log
+2026-06-24 11:26:44 | INFO     | smart_complaint.app.services.scheduler.scheduler:53 | Escalation scheduler stopped.
+2026-06-24 11:26:44 | INFO     | smart_complaint.app.main.main:50 | Shutting down SmartComplaintManager
+2026-06-24 11:26:45 | INFO     | smart_complaint.app.main.main:119 | Application created successfully.
+2026-06-24 11:26:45 | INFO     | smart_complaint.app.main.main:30 | Starting SmartComplaintManager v1.0.0 [development]
+2026-06-24 11:26:45 | INFO     | smart_complaint.app.database.database:83 | Database tables created / verified.
+2026-06-24 11:26:45 | INFO     | smart_complaint.app.services.scheduler.scheduler:46 | Escalation scheduler started (interval=5 min)
+2026-06-24 11:26:48 | INFO     | smart_complaint.app.database.database:91 | Database connection verified.
+2026-06-24 11:26:51 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:99 | Escalation run complete: {'notified': 0, 'escalated': 0, 'critical': 0}
+2026-06-24 11:26:51 | INFO     | smart_complaint.app.services.scheduler.scheduler:53 | Escalation scheduler stopped.
+2026-06-24 11:26:51 | INFO     | smart_complaint.app.main.main:50 | Shutting down SmartComplaintManager
+2026-06-24 11:26:51 | INFO     | smart_complaint.app.main.main:30 | Starting SmartComplaintManager v1.0.0 [development]
+2026-06-24 11:26:51 | INFO     | smart_complaint.app.database.database:83 | Database tables created / verified.
+2026-06-24 11:26:51 | INFO     | smart_complaint.app.services.scheduler.scheduler:46 | Escalation scheduler started (interval=5 min)
+2026-06-24 11:26:53 | INFO     | smart_complaint.app.services.scheduler.scheduler:53 | Escalation scheduler stopped.
+2026-06-24 11:26:53 | INFO     | smart_complaint.app.main.main:50 | Shutting down SmartComplaintManager
+2026-06-24 11:26:53 | INFO     | smart_complaint.app.main.main:30 | Starting SmartComplaintManager v1.0.0 [development]
+2026-06-24 11:26:53 | INFO     | smart_complaint.app.database.database:83 | Database tables created / verified.
+2026-06-24 11:26:53 | INFO     | smart_complaint.app.services.scheduler.scheduler:46 | Escalation scheduler started (interval=5 min)
+2026-06-24 11:26:54 | INFO     | smart_complaint.app.services.scheduler.scheduler:53 | Escalation scheduler stopped.
+2026-06-24 11:26:54 | INFO     | smart_complaint.app.main.main:50 | Shutting down SmartComplaintManager
+2026-06-24 11:26:54 | INFO     | smart_complaint.app.main.main:30 | Starting SmartComplaintManager v1.0.0 [development]
+2026-06-24 11:26:54 | INFO     | smart_complaint.app.database.database:83 | Database tables created / verified.
+2026-06-24 11:26:54 | INFO     | smart_complaint.app.services.scheduler.scheduler:46 | Escalation scheduler started (interval=5 min)
+2026-06-24 11:26:56 | INFO     | smart_complaint.app.services.scheduler.scheduler:53 | Escalation scheduler stopped.
+2026-06-24 11:26:56 | INFO     | smart_complaint.app.main.main:50 | Shutting down SmartComplaintManager
+2026-06-24 11:26:56 | INFO     | smart_complaint.app.main.main:30 | Starting SmartComplaintManager v1.0.0 [development]
+2026-06-24 11:26:56 | INFO     | smart_complaint.app.database.database:83 | Database tables created / verified.
+2026-06-24 11:26:56 | INFO     | smart_complaint.app.services.scheduler.scheduler:46 | Escalation scheduler started (interval=5 min)
+2026-06-24 11:26:57 | INFO     | smart_complaint.app.services.scheduler.scheduler:53 | Escalation scheduler stopped.
+2026-06-24 11:26:57 | INFO     | smart_complaint.app.main.main:50 | Shutting down SmartComplaintManager
+2026-06-24 11:26:57 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:99 | Escalation run complete: {'notified': 0, 'escalated': 0, 'critical': 0}
+2026-06-24 11:26:57 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:96 | Complaint #999 flagged for staff notification (24h+)
+2026-06-24 11:26:57 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:99 | Escalation run complete: {'notified': 1, 'escalated': 0, 'critical': 0}
+2026-06-24 11:26:57 | WARNING  | smart_complaint.app.services.escalation_service.escalation_service:85 | Complaint #999 escalated to admin (48h+)
+2026-06-24 11:26:57 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:99 | Escalation run complete: {'notified': 0, 'escalated': 1, 'critical': 0}
+2026-06-24 11:26:57 | WARNING  | smart_complaint.app.services.escalation_service.escalation_service:73 | Complaint #999 escalated to CRITICAL (72h+)
+2026-06-24 11:26:57 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:99 | Escalation run complete: {'notified': 0, 'escalated': 0, 'critical': 1}
+2026-06-24 11:26:57 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:99 | Escalation run complete: {'notified': 0, 'escalated': 0, 'critical': 0}
+2026-06-24 11:26:57 | WARNING  | smart_complaint.app.services.escalation_service.escalation_service:73 | Complaint #999 escalated to CRITICAL (72h+)
+2026-06-24 11:26:57 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:99 | Escalation run complete: {'notified': 0, 'escalated': 0, 'critical': 1}
+2026-06-24 11:26:57 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:96 | Complaint #999 flagged for staff notification (24h+)
+2026-06-24 11:26:57 | WARNING  | smart_complaint.app.services.escalation_service.escalation_service:85 | Complaint #999 escalated to admin (48h+)
+2026-06-24 11:26:57 | WARNING  | smart_complaint.app.services.escalation_service.escalation_service:73 | Complaint #999 escalated to CRITICAL (72h+)
+2026-06-24 11:26:57 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:99 | Escalation run complete: {'notified': 1, 'escalated': 1, 'critical': 1}
+2026-06-24 11:26:57 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:96 | Complaint #999 flagged for staff notification (24h+)
+2026-06-24 11:26:57 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:99 | Escalation run complete: {'notified': 1, 'escalated': 0, 'critical': 0}
+2026-06-24 11:26:57 | WARNING  | smart_complaint.app.services.escalation_service.escalation_service:73 | Complaint #999 escalated to CRITICAL (72h+)
+2026-06-24 11:26:57 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:99 | Escalation run complete: {'notified': 0, 'escalated': 0, 'critical': 1}
+2026-06-24 11:26:57 | INFO     | smart_complaint.app.main.main:30 | Starting SmartComplaintManager v1.0.0 [development]
+2026-06-24 11:26:57 | INFO     | smart_complaint.app.database.database:83 | Database tables created / verified.
+2026-06-24 11:26:57 | INFO     | smart_complaint.app.services.scheduler.scheduler:46 | Escalation scheduler started (interval=5 min)
+2026-06-24 11:27:00 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:99 | Escalation run complete: {'notified': 0, 'escalated': 0, 'critical': 0}
+2026-06-24 11:27:00 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:99 | Escalation run complete: {'notified': 0, 'escalated': 0, 'critical': 0}
+2026-06-24 11:27:00 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:99 | Escalation run complete: {'notified': 0, 'escalated': 0, 'critical': 0}
+2026-06-24 11:27:01 | INFO     | smart_complaint.app.database.database:91 | Database connection verified.
+2026-06-24 11:27:01 | INFO     | smart_complaint.app.services.scheduler.scheduler:53 | Escalation scheduler stopped.
+2026-06-24 11:27:01 | INFO     | smart_complaint.app.main.main:50 | Shutting down SmartComplaintManager
+2026-06-24 11:27:01 | INFO     | smart_complaint.app.main.main:30 | Starting SmartComplaintManager v1.0.0 [development]
+2026-06-24 11:27:01 | INFO     | smart_complaint.app.database.database:83 | Database tables created / verified.
+2026-06-24 11:27:01 | INFO     | smart_complaint.app.services.scheduler.scheduler:46 | Escalation scheduler started (interval=5 min)
+2026-06-24 11:27:04 | INFO     | smart_complaint.app.services.scheduler.scheduler:53 | Escalation scheduler stopped.
+2026-06-24 11:27:04 | INFO     | smart_complaint.app.main.main:50 | Shutting down SmartComplaintManager
+2026-06-24 11:27:04 | INFO     | smart_complaint.app.main.main:30 | Starting SmartComplaintManager v1.0.0 [development]
+2026-06-24 11:27:04 | INFO     | smart_complaint.app.database.database:83 | Database tables created / verified.
+2026-06-24 11:27:04 | INFO     | smart_complaint.app.services.scheduler.scheduler:46 | Escalation scheduler started (interval=5 min)
+2026-06-24 11:27:04 | INFO     | smart_complaint.app.database.database:91 | Database connection verified.
+2026-06-24 11:27:04 | INFO     | smart_complaint.app.database.database:91 | Database connection verified.
+2026-06-24 11:27:04 | INFO     | smart_complaint.app.database.database:91 | Database connection verified.
+2026-06-24 11:27:04 | INFO     | smart_complaint.app.database.database:91 | Database connection verified.
+2026-06-24 11:27:04 | INFO     | smart_complaint.app.services.scheduler.scheduler:53 | Escalation scheduler stopped.
+2026-06-24 11:27:04 | INFO     | smart_complaint.app.main.main:50 | Shutting down SmartComplaintManager
+2026-06-24 11:28:48 | INFO     | smart_complaint.logging_config:62 | Logging initialized — level=DEBUG, file=logs/app.log
+2026-06-24 11:28:51 | INFO     | smart_complaint.app.main.main:119 | Application created successfully.
+2026-06-24 11:28:51 | INFO     | smart_complaint.app.main.main:30 | Starting SmartComplaintManager v1.0.0 [development]
+2026-06-24 11:28:51 | INFO     | smart_complaint.app.database.database:83 | Database tables created / verified.
+2026-06-24 11:28:51 | INFO     | smart_complaint.app.services.scheduler.scheduler:46 | Escalation scheduler started (interval=5 min)
+2026-06-24 11:28:52 | INFO     | smart_complaint.app.services.scheduler.scheduler:53 | Escalation scheduler stopped.
+2026-06-24 11:28:52 | INFO     | smart_complaint.app.main.main:50 | Shutting down SmartComplaintManager
+2026-06-24 11:29:07 | INFO     | smart_complaint.logging_config:62 | Logging initialized — level=DEBUG, file=logs/app.log
+2026-06-24 11:29:09 | INFO     | smart_complaint.app.main.main:119 | Application created successfully.
+2026-06-24 11:29:09 | INFO     | smart_complaint.app.main.main:30 | Starting SmartComplaintManager v1.0.0 [development]
+2026-06-24 11:29:09 | INFO     | smart_complaint.app.database.database:83 | Database tables created / verified.
+2026-06-24 11:29:09 | INFO     | smart_complaint.app.services.scheduler.scheduler:46 | Escalation scheduler started (interval=5 min)
+2026-06-24 11:29:13 | INFO     | smart_complaint.app.database.database:91 | Database connection verified.
+2026-06-24 11:29:16 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:99 | Escalation run complete: {'notified': 0, 'escalated': 0, 'critical': 0}
+2026-06-24 11:29:16 | INFO     | smart_complaint.app.services.scheduler.scheduler:53 | Escalation scheduler stopped.
+2026-06-24 11:29:16 | INFO     | smart_complaint.app.main.main:50 | Shutting down SmartComplaintManager
+2026-06-24 11:29:16 | INFO     | smart_complaint.app.main.main:30 | Starting SmartComplaintManager v1.0.0 [development]
+2026-06-24 11:29:16 | INFO     | smart_complaint.app.database.database:83 | Database tables created / verified.
+2026-06-24 11:29:16 | INFO     | smart_complaint.app.services.scheduler.scheduler:46 | Escalation scheduler started (interval=5 min)
+2026-06-24 11:29:18 | INFO     | smart_complaint.app.services.scheduler.scheduler:53 | Escalation scheduler stopped.
+2026-06-24 11:29:18 | INFO     | smart_complaint.app.main.main:50 | Shutting down SmartComplaintManager
+2026-06-24 11:29:18 | INFO     | smart_complaint.app.main.main:30 | Starting SmartComplaintManager v1.0.0 [development]
+2026-06-24 11:29:18 | INFO     | smart_complaint.app.database.database:83 | Database tables created / verified.
+2026-06-24 11:29:18 | INFO     | smart_complaint.app.services.scheduler.scheduler:46 | Escalation scheduler started (interval=5 min)
+2026-06-24 11:29:19 | INFO     | smart_complaint.app.services.scheduler.scheduler:53 | Escalation scheduler stopped.
+2026-06-24 11:29:19 | INFO     | smart_complaint.app.main.main:50 | Shutting down SmartComplaintManager
+2026-06-24 11:29:19 | INFO     | smart_complaint.app.main.main:30 | Starting SmartComplaintManager v1.0.0 [development]
+2026-06-24 11:29:19 | INFO     | smart_complaint.app.database.database:83 | Database tables created / verified.
+2026-06-24 11:29:19 | INFO     | smart_complaint.app.services.scheduler.scheduler:46 | Escalation scheduler started (interval=5 min)
+2026-06-24 11:29:21 | INFO     | smart_complaint.app.services.scheduler.scheduler:53 | Escalation scheduler stopped.
+2026-06-24 11:29:21 | INFO     | smart_complaint.app.main.main:50 | Shutting down SmartComplaintManager
+2026-06-24 11:29:21 | INFO     | smart_complaint.app.main.main:30 | Starting SmartComplaintManager v1.0.0 [development]
+2026-06-24 11:29:21 | INFO     | smart_complaint.app.database.database:83 | Database tables created / verified.
+2026-06-24 11:29:21 | INFO     | smart_complaint.app.services.scheduler.scheduler:46 | Escalation scheduler started (interval=5 min)
+2026-06-24 11:29:22 | INFO     | smart_complaint.app.services.scheduler.scheduler:53 | Escalation scheduler stopped.
+2026-06-24 11:29:22 | INFO     | smart_complaint.app.main.main:50 | Shutting down SmartComplaintManager
+2026-06-24 11:29:22 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:99 | Escalation run complete: {'notified': 0, 'escalated': 0, 'critical': 0}
+2026-06-24 11:29:22 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:96 | Complaint #999 flagged for staff notification (24h+)
+2026-06-24 11:29:22 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:99 | Escalation run complete: {'notified': 1, 'escalated': 0, 'critical': 0}
+2026-06-24 11:29:22 | WARNING  | smart_complaint.app.services.escalation_service.escalation_service:85 | Complaint #999 escalated to admin (48h+)
+2026-06-24 11:29:22 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:99 | Escalation run complete: {'notified': 0, 'escalated': 1, 'critical': 0}
+2026-06-24 11:29:22 | WARNING  | smart_complaint.app.services.escalation_service.escalation_service:73 | Complaint #999 escalated to CRITICAL (72h+)
+2026-06-24 11:29:22 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:99 | Escalation run complete: {'notified': 0, 'escalated': 0, 'critical': 1}
+2026-06-24 11:29:22 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:99 | Escalation run complete: {'notified': 0, 'escalated': 0, 'critical': 0}
+2026-06-24 11:29:22 | WARNING  | smart_complaint.app.services.escalation_service.escalation_service:73 | Complaint #999 escalated to CRITICAL (72h+)
+2026-06-24 11:29:22 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:99 | Escalation run complete: {'notified': 0, 'escalated': 0, 'critical': 1}
+2026-06-24 11:29:22 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:96 | Complaint #999 flagged for staff notification (24h+)
+2026-06-24 11:29:22 | WARNING  | smart_complaint.app.services.escalation_service.escalation_service:85 | Complaint #999 escalated to admin (48h+)
+2026-06-24 11:29:22 | WARNING  | smart_complaint.app.services.escalation_service.escalation_service:73 | Complaint #999 escalated to CRITICAL (72h+)
+2026-06-24 11:29:22 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:99 | Escalation run complete: {'notified': 1, 'escalated': 1, 'critical': 1}
+2026-06-24 11:29:22 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:96 | Complaint #999 flagged for staff notification (24h+)
+2026-06-24 11:29:22 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:99 | Escalation run complete: {'notified': 1, 'escalated': 0, 'critical': 0}
+2026-06-24 11:29:22 | WARNING  | smart_complaint.app.services.escalation_service.escalation_service:73 | Complaint #999 escalated to CRITICAL (72h+)
+2026-06-24 11:29:22 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:99 | Escalation run complete: {'notified': 0, 'escalated': 0, 'critical': 1}
+2026-06-24 11:29:22 | INFO     | smart_complaint.app.main.main:30 | Starting SmartComplaintManager v1.0.0 [development]
+2026-06-24 11:29:22 | INFO     | smart_complaint.app.database.database:83 | Database tables created / verified.
+2026-06-24 11:29:22 | INFO     | smart_complaint.app.services.scheduler.scheduler:46 | Escalation scheduler started (interval=5 min)
+2026-06-24 11:29:24 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:99 | Escalation run complete: {'notified': 0, 'escalated': 0, 'critical': 0}
+2026-06-24 11:29:24 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:99 | Escalation run complete: {'notified': 0, 'escalated': 0, 'critical': 0}
+2026-06-24 11:29:25 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:99 | Escalation run complete: {'notified': 0, 'escalated': 0, 'critical': 0}
+2026-06-24 11:29:26 | INFO     | smart_complaint.app.database.database:91 | Database connection verified.
+2026-06-24 11:29:26 | INFO     | smart_complaint.app.services.scheduler.scheduler:53 | Escalation scheduler stopped.
+2026-06-24 11:29:26 | INFO     | smart_complaint.app.main.main:50 | Shutting down SmartComplaintManager
+2026-06-24 11:29:26 | INFO     | smart_complaint.app.main.main:30 | Starting SmartComplaintManager v1.0.0 [development]
+2026-06-24 11:29:26 | INFO     | smart_complaint.app.database.database:83 | Database tables created / verified.
+2026-06-24 11:29:26 | INFO     | smart_complaint.app.services.scheduler.scheduler:46 | Escalation scheduler started (interval=5 min)
+2026-06-24 11:29:27 | INFO     | smart_complaint.app.services.scheduler.scheduler:53 | Escalation scheduler stopped.
+2026-06-24 11:29:27 | INFO     | smart_complaint.app.main.main:50 | Shutting down SmartComplaintManager
+2026-06-24 11:29:27 | INFO     | smart_complaint.app.main.main:30 | Starting SmartComplaintManager v1.0.0 [development]
+2026-06-24 11:29:27 | INFO     | smart_complaint.app.database.database:83 | Database tables created / verified.
+2026-06-24 11:29:27 | INFO     | smart_complaint.app.services.scheduler.scheduler:46 | Escalation scheduler started (interval=5 min)
+2026-06-24 11:29:28 | INFO     | smart_complaint.app.database.database:91 | Database connection verified.
+2026-06-24 11:29:28 | INFO     | smart_complaint.app.database.database:91 | Database connection verified.
+2026-06-24 11:29:28 | INFO     | smart_complaint.app.database.database:91 | Database connection verified.
+2026-06-24 11:29:28 | INFO     | smart_complaint.app.database.database:91 | Database connection verified.
+2026-06-24 11:29:28 | INFO     | smart_complaint.app.services.scheduler.scheduler:53 | Escalation scheduler stopped.
+2026-06-24 11:29:28 | INFO     | smart_complaint.app.main.main:50 | Shutting down SmartComplaintManager
+2026-06-24 11:30:02 | INFO     | smart_complaint.logging_config:62 | Logging initialized — level=DEBUG, file=logs/app.log
+2026-06-24 11:30:05 | INFO     | smart_complaint.app.main.main:127 | Application created successfully.
+2026-06-24 11:30:05 | INFO     | smart_complaint.app.main.main:30 | Starting SmartComplaintManager v1.0.0 [development]
+2026-06-24 11:30:05 | INFO     | smart_complaint.app.database.database:83 | Database tables created / verified.
+2026-06-24 11:30:05 | INFO     | smart_complaint.app.services.scheduler.scheduler:46 | Escalation scheduler started (interval=5 min)
+2026-06-24 11:30:05 | INFO     | smart_complaint.app.services.scheduler.scheduler:53 | Escalation scheduler stopped.
+2026-06-24 11:30:05 | INFO     | smart_complaint.app.main.main:50 | Shutting down SmartComplaintManager
+2026-06-24 11:30:22 | INFO     | smart_complaint.logging_config:62 | Logging initialized — level=DEBUG, file=logs/app.log
+2026-06-24 11:30:24 | INFO     | smart_complaint.app.main.main:127 | Application created successfully.
+2026-06-24 11:30:24 | INFO     | smart_complaint.app.main.main:30 | Starting SmartComplaintManager v1.0.0 [development]
+2026-06-24 11:30:24 | INFO     | smart_complaint.app.database.database:83 | Database tables created / verified.
+2026-06-24 11:30:24 | INFO     | smart_complaint.app.services.scheduler.scheduler:46 | Escalation scheduler started (interval=5 min)
+2026-06-24 11:30:28 | INFO     | smart_complaint.app.database.database:91 | Database connection verified.
+2026-06-24 11:30:31 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:99 | Escalation run complete: {'notified': 0, 'escalated': 0, 'critical': 0}
+2026-06-24 11:30:31 | INFO     | smart_complaint.app.services.scheduler.scheduler:53 | Escalation scheduler stopped.
+2026-06-24 11:30:31 | INFO     | smart_complaint.app.main.main:50 | Shutting down SmartComplaintManager
+2026-06-24 11:30:31 | INFO     | smart_complaint.app.main.main:30 | Starting SmartComplaintManager v1.0.0 [development]
+2026-06-24 11:30:31 | INFO     | smart_complaint.app.database.database:83 | Database tables created / verified.
+2026-06-24 11:30:31 | INFO     | smart_complaint.app.services.scheduler.scheduler:46 | Escalation scheduler started (interval=5 min)
+2026-06-24 11:30:32 | INFO     | smart_complaint.app.services.scheduler.scheduler:53 | Escalation scheduler stopped.
+2026-06-24 11:30:32 | INFO     | smart_complaint.app.main.main:50 | Shutting down SmartComplaintManager
+2026-06-24 11:30:32 | INFO     | smart_complaint.app.main.main:30 | Starting SmartComplaintManager v1.0.0 [development]
+2026-06-24 11:30:33 | INFO     | smart_complaint.app.database.database:83 | Database tables created / verified.
+2026-06-24 11:30:33 | INFO     | smart_complaint.app.services.scheduler.scheduler:46 | Escalation scheduler started (interval=5 min)
+2026-06-24 11:30:34 | INFO     | smart_complaint.app.services.scheduler.scheduler:53 | Escalation scheduler stopped.
+2026-06-24 11:30:34 | INFO     | smart_complaint.app.main.main:50 | Shutting down SmartComplaintManager
+2026-06-24 11:30:34 | INFO     | smart_complaint.app.main.main:30 | Starting SmartComplaintManager v1.0.0 [development]
+2026-06-24 11:30:34 | INFO     | smart_complaint.app.database.database:83 | Database tables created / verified.
+2026-06-24 11:30:34 | INFO     | smart_complaint.app.services.scheduler.scheduler:46 | Escalation scheduler started (interval=5 min)
+2026-06-24 11:30:36 | INFO     | smart_complaint.app.services.scheduler.scheduler:53 | Escalation scheduler stopped.
+2026-06-24 11:30:36 | INFO     | smart_complaint.app.main.main:50 | Shutting down SmartComplaintManager
+2026-06-24 11:30:36 | INFO     | smart_complaint.app.main.main:30 | Starting SmartComplaintManager v1.0.0 [development]
+2026-06-24 11:30:36 | INFO     | smart_complaint.app.database.database:83 | Database tables created / verified.
+2026-06-24 11:30:36 | INFO     | smart_complaint.app.services.scheduler.scheduler:46 | Escalation scheduler started (interval=5 min)
+2026-06-24 11:30:37 | INFO     | smart_complaint.app.services.scheduler.scheduler:53 | Escalation scheduler stopped.
+2026-06-24 11:30:37 | INFO     | smart_complaint.app.main.main:50 | Shutting down SmartComplaintManager
+2026-06-24 11:30:37 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:99 | Escalation run complete: {'notified': 0, 'escalated': 0, 'critical': 0}
+2026-06-24 11:30:37 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:96 | Complaint #999 flagged for staff notification (24h+)
+2026-06-24 11:30:37 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:99 | Escalation run complete: {'notified': 1, 'escalated': 0, 'critical': 0}
+2026-06-24 11:30:37 | WARNING  | smart_complaint.app.services.escalation_service.escalation_service:85 | Complaint #999 escalated to admin (48h+)
+2026-06-24 11:30:37 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:99 | Escalation run complete: {'notified': 0, 'escalated': 1, 'critical': 0}
+2026-06-24 11:30:37 | WARNING  | smart_complaint.app.services.escalation_service.escalation_service:73 | Complaint #999 escalated to CRITICAL (72h+)
+2026-06-24 11:30:37 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:99 | Escalation run complete: {'notified': 0, 'escalated': 0, 'critical': 1}
+2026-06-24 11:30:37 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:99 | Escalation run complete: {'notified': 0, 'escalated': 0, 'critical': 0}
+2026-06-24 11:30:37 | WARNING  | smart_complaint.app.services.escalation_service.escalation_service:73 | Complaint #999 escalated to CRITICAL (72h+)
+2026-06-24 11:30:37 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:99 | Escalation run complete: {'notified': 0, 'escalated': 0, 'critical': 1}
+2026-06-24 11:30:37 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:96 | Complaint #999 flagged for staff notification (24h+)
+2026-06-24 11:30:37 | WARNING  | smart_complaint.app.services.escalation_service.escalation_service:85 | Complaint #999 escalated to admin (48h+)
+2026-06-24 11:30:37 | WARNING  | smart_complaint.app.services.escalation_service.escalation_service:73 | Complaint #999 escalated to CRITICAL (72h+)
+2026-06-24 11:30:37 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:99 | Escalation run complete: {'notified': 1, 'escalated': 1, 'critical': 1}
+2026-06-24 11:30:37 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:96 | Complaint #999 flagged for staff notification (24h+)
+2026-06-24 11:30:37 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:99 | Escalation run complete: {'notified': 1, 'escalated': 0, 'critical': 0}
+2026-06-24 11:30:37 | WARNING  | smart_complaint.app.services.escalation_service.escalation_service:73 | Complaint #999 escalated to CRITICAL (72h+)
+2026-06-24 11:30:37 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:99 | Escalation run complete: {'notified': 0, 'escalated': 0, 'critical': 1}
+2026-06-24 11:30:37 | INFO     | smart_complaint.app.main.main:30 | Starting SmartComplaintManager v1.0.0 [development]
+2026-06-24 11:30:37 | INFO     | smart_complaint.app.database.database:83 | Database tables created / verified.
+2026-06-24 11:30:37 | INFO     | smart_complaint.app.services.scheduler.scheduler:46 | Escalation scheduler started (interval=5 min)
+2026-06-24 11:30:39 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:99 | Escalation run complete: {'notified': 0, 'escalated': 0, 'critical': 0}
+2026-06-24 11:30:39 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:99 | Escalation run complete: {'notified': 0, 'escalated': 0, 'critical': 0}
+2026-06-24 11:30:40 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:99 | Escalation run complete: {'notified': 0, 'escalated': 0, 'critical': 0}
+2026-06-24 11:30:41 | INFO     | smart_complaint.app.database.database:91 | Database connection verified.
+2026-06-24 11:30:41 | INFO     | smart_complaint.app.services.scheduler.scheduler:53 | Escalation scheduler stopped.
+2026-06-24 11:30:41 | INFO     | smart_complaint.app.main.main:50 | Shutting down SmartComplaintManager
+2026-06-24 11:30:41 | INFO     | smart_complaint.app.main.main:30 | Starting SmartComplaintManager v1.0.0 [development]
+2026-06-24 11:30:41 | INFO     | smart_complaint.app.database.database:83 | Database tables created / verified.
+2026-06-24 11:30:41 | INFO     | smart_complaint.app.services.scheduler.scheduler:46 | Escalation scheduler started (interval=5 min)
+2026-06-24 11:30:42 | INFO     | smart_complaint.app.services.scheduler.scheduler:53 | Escalation scheduler stopped.
+2026-06-24 11:30:42 | INFO     | smart_complaint.app.main.main:50 | Shutting down SmartComplaintManager
+2026-06-24 11:30:42 | INFO     | smart_complaint.app.main.main:30 | Starting SmartComplaintManager v1.0.0 [development]
+2026-06-24 11:30:42 | INFO     | smart_complaint.app.database.database:83 | Database tables created / verified.
+2026-06-24 11:30:42 | INFO     | smart_complaint.app.services.scheduler.scheduler:46 | Escalation scheduler started (interval=5 min)
+2026-06-24 11:30:42 | INFO     | smart_complaint.app.database.database:91 | Database connection verified.
+2026-06-24 11:30:42 | INFO     | smart_complaint.app.database.database:91 | Database connection verified.
+2026-06-24 11:30:42 | INFO     | smart_complaint.app.database.database:91 | Database connection verified.
+2026-06-24 11:30:42 | INFO     | smart_complaint.app.database.database:91 | Database connection verified.
+2026-06-24 11:30:42 | INFO     | smart_complaint.app.services.scheduler.scheduler:53 | Escalation scheduler stopped.
+2026-06-24 11:30:42 | INFO     | smart_complaint.app.main.main:50 | Shutting down SmartComplaintManager
+2026-06-24 11:31:15 | INFO     | smart_complaint.logging_config:62 | Logging initialized — level=DEBUG, file=logs/app.log
+2026-06-24 11:31:20 | INFO     | smart_complaint.app.main.main:127 | Application created successfully.
+2026-06-24 11:31:20 | INFO     | smart_complaint.app.main.main:30 | Starting SmartComplaintManager v1.0.0 [development]
+2026-06-24 11:31:20 | INFO     | smart_complaint.app.database.database:83 | Database tables created / verified.
+2026-06-24 11:31:20 | INFO     | smart_complaint.app.services.scheduler.scheduler:46 | Escalation scheduler started (interval=5 min)
+2026-06-24 11:34:53 | INFO     | smart_complaint.app.services.scheduler.scheduler:53 | Escalation scheduler stopped.
+2026-06-24 11:34:53 | INFO     | smart_complaint.app.main.main:50 | Shutting down SmartComplaintManager
+2026-06-24 11:34:56 | INFO     | smart_complaint.logging_config:62 | Logging initialized — level=DEBUG, file=logs/app.log
+2026-06-24 11:34:58 | INFO     | smart_complaint.app.main.main:127 | Application created successfully.
+2026-06-24 11:34:58 | INFO     | smart_complaint.app.main.main:30 | Starting SmartComplaintManager v1.0.0 [development]
+2026-06-24 11:34:58 | INFO     | smart_complaint.app.database.database:83 | Database tables created / verified.
+2026-06-24 11:34:58 | INFO     | smart_complaint.app.services.scheduler.scheduler:46 | Escalation scheduler started (interval=5 min)
+2026-06-24 11:35:00 | INFO     | smart_complaint.logging_config:62 | Logging initialized — level=DEBUG, file=logs/app.log
+2026-06-24 11:35:03 | INFO     | smart_complaint.app.main.main:127 | Application created successfully.
+2026-06-24 11:35:03 | INFO     | smart_complaint.app.main.main:30 | Starting SmartComplaintManager v1.0.0 [development]
+2026-06-24 11:35:03 | INFO     | smart_complaint.app.database.database:83 | Database tables created / verified.
+2026-06-24 11:35:03 | INFO     | smart_complaint.app.services.scheduler.scheduler:46 | Escalation scheduler started (interval=5 min)
+2026-06-24 11:35:06 | INFO     | smart_complaint.logging_config:62 | Logging initialized — level=DEBUG, file=logs/app.log
+2026-06-24 11:35:09 | INFO     | smart_complaint.app.main.main:127 | Application created successfully.
+2026-06-24 11:35:09 | INFO     | smart_complaint.app.main.main:30 | Starting SmartComplaintManager v1.0.0 [development]
+2026-06-24 11:35:09 | INFO     | smart_complaint.app.database.database:83 | Database tables created / verified.
+2026-06-24 11:35:09 | INFO     | smart_complaint.app.services.scheduler.scheduler:46 | Escalation scheduler started (interval=5 min)
+2026-06-24 11:40:09 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:99 | Escalation run complete: {'notified': 0, 'escalated': 0, 'critical': 0}
+2026-06-24 11:40:09 | INFO     | smart_complaint.app.services.scheduler.scheduler:23 | Scheduled escalation job result: {'notified': 0, 'escalated': 0, 'critical': 0}
+2026-06-24 11:45:09 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:99 | Escalation run complete: {'notified': 0, 'escalated': 0, 'critical': 0}
+2026-06-24 11:45:09 | INFO     | smart_complaint.app.services.scheduler.scheduler:23 | Scheduled escalation job result: {'notified': 0, 'escalated': 0, 'critical': 0}
+2026-06-24 11:50:09 | INFO     | smart_complaint.app.services.escalation_service.escalation_service:99 | Escalation run complete: {'notified': 0, 'escalated': 0, 'critical': 0}
+2026-06-24 11:50:09 | INFO     | smart_complaint.app.services.scheduler.scheduler:23 | Scheduled escalation job result: {'notified': 0, 'escalated': 0, 'critical': 0}
+2026-06-24 11:54:12 | INFO     | smart_complaint.app.services.scheduler.scheduler:53 | Escalation scheduler stopped.
+2026-06-24 11:54:12 | INFO     | smart_complaint.app.main.main:50 | Shutting down SmartComplaintManager

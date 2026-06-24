@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Escalation — SCM</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="/frontend/css/app.css" rel="stylesheet">
+</head>
+<body>
+<div class="scm-wrapper">
+  <div class="scm-sidebar" id="scm-sidebar"></div>
+  <div class="scm-main">
+    <nav class="navbar scm-navbar px-3 d-flex align-items-center justify-content-between" id="scm-navbar"></nav>
+    <div class="scm-content">
+  <!-- Scheduler panel -->
+  <div class="row g-3 mb-4">
+    <div class="col-md-6">
+      <div class="card table-card p-3 h-100">
+        <h6 class="fw-bold mb-3"><i class="bi bi-clock me-2 text-primary"></i>Scheduler Status</h6>
+        <div id="schedulerPanel"><div class="spinner-border spinner-border-sm text-primary"></div></div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card table-card p-3 h-100">
+        <h6 class="fw-bold mb-3"><i class="bi bi-play-circle me-2 text-success"></i>Manual Trigger</h6>
+        <p class="text-muted small">Run the escalation engine immediately outside the scheduled interval.</p>
+        <div id="runResult" class="alert d-none mb-2"></div>
+        <button class="btn btn-warning fw-semibold" id="runBtn" onclick="runEscalation()">
+          <i class="bi bi-exclamation-octagon me-1"></i>Run Escalation Now
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Escalation thresholds info -->
+  <div class="alert alert-info d-flex align-items-start gap-2 mb-4">
+    <i class="bi bi-info-circle-fill mt-1"></i>
+    <div>
+      <strong>Escalation Thresholds</strong><br>
+      <span class="small">
+        &gt; 24h pending → <strong>Level 1</strong> (Staff notified) ·
+        &gt; 48h pending → <strong>Level 2</strong> (Status: Escalated) ·
+        &gt; 72h pending → <strong>Level 3</strong> (Priority: Critical)
+      </span>
+    </div>
+  </div>
+
+  <!-- Escalated complaints -->
+  <div class="card table-card mb-4">
+    <div class="card-header bg-white d-flex align-items-center justify-content-between py-3">
+      <h6 class="mb-0 fw-bold"><i class="bi bi-exclamation-triangle me-2 text-danger"></i>Escalated Complaints</h6>
+      <span class="badge bg-danger" id="escalatedCount">—</span>
+    </div>
+    <div class="card-body p-0">
+      <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0">
+          <thead class="table-light">
+            <tr><th>#</th><th>Title</th><th>Priority</th><th>Status</th><th>Escalation Level</th><th>Age</th><th></th></tr>
+          </thead>
+          <tbody id="escalatedTable"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Escalation logs -->
+  <div class="card table-card">
+    <div class="card-header bg-white d-flex align-items-center justify-content-between py-3">
+      <h6 class="mb-0 fw-bold"><i class="bi bi-journal-text me-2"></i>Escalation Audit Log</h6>
+      <div class="input-group input-group-sm" style="width:240px;">
+        <input type="number" class="form-control" id="filterComplaintId" placeholder="Filter by complaint ID">
+        <button class="btn btn-outline-secondary" onclick="loadLogs()"><i class="bi bi-search"></i></button>
+        <button class="btn btn-outline-secondary" onclick="document.getElementById('filterComplaintId').value='';loadLogs()"><i class="bi bi-x"></i></button>
+      </div>
+    </div>
+    <div class="card-body p-0">
+      <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0">
+          <thead class="table-light">
+            <tr><th>#</th><th>Complaint</th><th>Level</th><th>Reason</th><th>Notes</th><th>Timestamp</th></tr>
+          </thead>
+          <tbody id="logsTable"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/frontend/js/api.js"></script>
+<script src="/frontend/js/utils.js"></script>
+<script src="/frontend/js/components.js"></script>
+<script>
+  const { showToast, showLoading, priorityBadge, statusBadge, formatDate } = SCMUtils;
+
+  const LEVEL_BADGE = { 1: 'bg-warning text-dark', 2: 'bg-danger', 3: 'bg-dark' };
+  const REASON_LABEL = { pending_over_24h: '24h+', pending_over_48h: '48h+', pending_over_72h: '72h+' };
+
+  async function loadSchedulerStatus() {
+    try {
+      const s = await API.getSchedulerStatus();
+      const job = s.jobs?.[0];
+      document.getElementById('schedulerPanel').innerHTML = `
+        <div class="mb-2">
+          <span class="badge ${s.running ? 'bg-success' : 'bg-danger'} me-2">${s.running ? '● Running' : '● Stopped'}</span>
+          <span class="text-muted small">Background Scheduler</span>
+        </div>
+        <div class="small text-muted">
+          ${job ? `<i class="bi bi-calendar-check me-1"></i>Next run: <strong>${new Date(job.next_run_time).toLocaleString()}</strong>` : 'No jobs scheduled'}
+        </div>`;
+    } catch {
+      document.getElementById('schedulerPanel').innerHTML = '<span class="text-muted small">Unavailable</span>';
+    }
+  }
+
+  async function runEscalation() {
+    showLoading(true);
+    document.getElementById('runBtn').disabled = true;
+    const resultEl = document.getElementById('runResult');
+    try {
+      const r = await API.runEscalation();
+      resultEl.className = 'alert alert-success';
+      resultEl.innerHTML = `<i class="bi bi-check-circle me-2"></i>Complete — Notified: <strong>${r.notified}</strong>, Escalated: <strong>${r.escalated}</strong>, Critical: <strong>${r.critical}</strong>`;
+      resultEl.classList.remove('d-none');
+      loadEscalated();
+      loadLogs();
+    } catch (err) {
+      resultEl.className = 'alert alert-danger';
+      resultEl.textContent = err.detail || 'Escalation run failed.';
+      resultEl.classList.remove('d-none');
+    } finally {
+      showLoading(false);
+      document.getElementById('runBtn').disabled = false;
+    }
+  }
+
+  function ageHours(iso) {
+    const ms = Date.now() - new Date(iso).getTime();
+    return Math.floor(ms / 3600000);
+  }
+
+  async function loadEscalated() {
+    try {
+      const data = await API.listComplaints({ page: 1, size: 100 });
+      const escalated = (data.items || []).filter(c => c.escalation_level > 0 || c.status === 'escalated');
+      document.getElementById('escalatedCount').textContent = escalated.length;
+      const tbody = document.getElementById('escalatedTable');
+      if (!escalated.length) {
+        tbody.innerHTML = `<tr><td colspan="7"><div class="empty-state"><i class="bi bi-check-circle text-success" style="font-size:2rem;"></i><p class="mt-2">No escalated complaints</p></div></td></tr>`;
+        return;
+      }
+      tbody.innerHTML = escalated.map(c => `
+        <tr>
+          <td class="text-muted small">#${c.id}</td>
+          <td>${c.title}</td>
+          <td>${priorityBadge(c.priority)}</td>
+          <td>${statusBadge(c.status)}</td>
+          <td><span class="badge ${LEVEL_BADGE[c.escalation_level] || 'bg-secondary'}">Level ${c.escalation_level}</span></td>
+          <td class="text-muted small">${ageHours(c.created_at)}h ago</td>
+          <td><a href="../student/complaint-detail.html?id=${c.id}" class="btn btn-sm btn-outline-secondary">View</a></td>
+        </tr>`).join('');
+    } catch (err) {
+      showToast(err.detail || 'Failed to load escalated complaints.', 'danger');
+    }
+  }
+
+  async function loadLogs() {
+    const cid = document.getElementById('filterComplaintId').value || null;
+    const tbody = document.getElementById('logsTable');
+    tbody.innerHTML = `<tr><td colspan="6" class="text-center py-3"><div class="spinner-border spinner-border-sm text-primary"></div></td></tr>`;
+    try {
+      const logs = await API.getEscalationLogs(cid ? parseInt(cid) : null);
+      if (!logs.length) {
+        tbody.innerHTML = `<tr><td colspan="6"><div class="empty-state"><i class="bi bi-journal"></i><p>No logs found</p></div></td></tr>`;
+        return;
+      }
+      tbody.innerHTML = logs.map(l => `
+        <tr>
+          <td class="text-muted small">#${l.id}</td>
+          <td><a href="../student/complaint-detail.html?id=${l.complaint_id}">#${l.complaint_id}</a></td>
+          <td><span class="badge ${LEVEL_BADGE[l.escalation_level] || 'bg-secondary'}">Level ${l.escalation_level}</span></td>
+          <td><code>${REASON_LABEL[l.reason] || l.reason}</code></td>
+          <td class="text-muted small">${l.notes || '—'}</td>
+          <td class="text-muted small">${formatDate(l.created_at)}</td>
+        </tr>`).join('');
+    } catch (err) {
+      showToast(err.detail || 'Failed to load logs.', 'danger');
+    }
+  }
+
+  (async () => {
+    const user = await SCMComponents.init('Escalation Management', ['admin']);
+    if (!user) return;
+    loadSchedulerStatus();
+    loadEscalated();
+    loadLogs();
+  })();
+</script>
+</body>
+</html>

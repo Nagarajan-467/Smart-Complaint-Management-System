@@ -1,0 +1,197 @@
+/* app.css — SCM custom styles layered on Bootstrap 5 */
+
+:root {
+  --scm-sidebar-width: 250px;
+  --scm-sidebar-bg: #1e2a3a;
+  --scm-sidebar-text: #c9d6e3;
+  --scm-sidebar-active: #4e9af1;
+  --scm-navbar-height: 56px;
+}
+
+/* ── Layout ────────────────────────────────────────────────────────────── */
+
+body {
+  background-color: #f4f6f9;
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+.scm-wrapper {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* ── Sidebar ────────────────────────────────────────────────────────────── */
+
+.scm-sidebar {
+  width: var(--scm-sidebar-width);
+  min-height: 100vh;
+  background: var(--scm-sidebar-bg);
+  color: var(--scm-sidebar-text);
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  transition: width 0.25s ease;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1030;
+  overflow-y: auto;
+}
+
+.scm-sidebar .sidebar-brand {
+  padding: 1.2rem 1.25rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: .5px;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+  text-decoration: none;
+}
+
+.scm-sidebar .nav-link {
+  color: var(--scm-sidebar-text);
+  padding: .65rem 1.25rem;
+  border-radius: 6px;
+  margin: 2px 8px;
+  font-size: .9rem;
+  transition: background .15s, color .15s;
+}
+
+.scm-sidebar .nav-link:hover,
+.scm-sidebar .nav-link.active {
+  background: rgba(78,154,241,.18);
+  color: #fff;
+}
+
+.scm-sidebar .nav-link i { width: 20px; margin-right: 8px; }
+
+.scm-sidebar .nav-section {
+  font-size: .7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: rgba(201,214,227,.45);
+  padding: 1rem 1.25rem .25rem;
+}
+
+/* ── Main content ───────────────────────────────────────────────────────── */
+
+.scm-main {
+  margin-left: var(--scm-sidebar-width);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.scm-navbar {
+  background: #fff;
+  box-shadow: 0 1px 4px rgba(0,0,0,.08);
+  height: var(--scm-navbar-height);
+  position: sticky;
+  top: 0;
+  z-index: 1020;
+}
+
+.scm-content {
+  padding: 1.5rem;
+  flex: 1;
+}
+
+/* ── Cards ──────────────────────────────────────────────────────────────── */
+
+.stat-card {
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,.07);
+  transition: transform .15s, box-shadow .15s;
+}
+
+.stat-card:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(0,0,0,.12); }
+
+.stat-card .stat-icon {
+  width: 52px; height: 52px;
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.4rem;
+}
+
+/* ── Tables ─────────────────────────────────────────────────────────────── */
+
+.table-card {
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,.06);
+  overflow: hidden;
+}
+
+.table-card .table { margin-bottom: 0; }
+.table-card .table th { font-size: .8rem; text-transform: uppercase; letter-spacing: .5px; }
+
+/* ── Auth pages ─────────────────────────────────────────────────────────── */
+
+.auth-wrapper {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #1e2a3a 0%, #2d4a6e 100%);
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 440px;
+  border: none;
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0,0,0,.3);
+}
+
+.auth-logo { font-size: 2rem; color: var(--scm-sidebar-active); }
+
+/* ── Badges ─────────────────────────────────────────────────────────────── */
+
+.badge { font-size: .75rem; padding: .35em .65em; }
+
+/* ── Complaint detail ───────────────────────────────────────────────────── */
+
+.detail-label { font-size: .75rem; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; color: #6c757d; }
+.detail-value { font-size: .95rem; }
+
+/* ── Mobile responsive ──────────────────────────────────────────────────── */
+
+@media (max-width: 768px) {
+  .scm-sidebar {
+    width: 0;
+    overflow: hidden;
+  }
+  .scm-sidebar.show {
+    width: var(--scm-sidebar-width);
+  }
+  .scm-main {
+    margin-left: 0;
+  }
+  .scm-content { padding: 1rem; }
+}
+
+/* ── Toggle button (mobile) ─────────────────────────────────────────────── */
+
+.sidebar-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.4rem;
+  color: #1e2a3a;
+  padding: 0 .75rem;
+}
+
+@media (max-width: 768px) { .sidebar-toggle { display: block; } }
+
+/* ── Empty state ────────────────────────────────────────────────────────── */
+
+.empty-state {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: #adb5bd;
+}
+
+.empty-state i { font-size: 3.5rem; display: block; margin-bottom: 1rem; }

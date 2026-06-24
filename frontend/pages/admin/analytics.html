@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Analytics Dashboard — SCM</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="/frontend/css/app.css" rel="stylesheet">
+  <style>
+    .chart-card  { border:none; border-radius:12px; box-shadow:0 2px 8px rgba(0,0,0,.07); }
+    .chart-wrap  { position:relative; height:260px; }
+    .section-title { font-size:.7rem; font-weight:700; text-transform:uppercase;
+                     letter-spacing:1px; color:#6c757d; margin-bottom:1rem; }
+    .kpi-delta   { font-size:.75rem; }
+    .tab-content { padding-top:1.25rem; }
+    canvas       { display:block; }
+  </style>
+</head>
+<body>
+<div class="scm-wrapper">
+  <div class="scm-sidebar" id="scm-sidebar"></div>
+  <div class="scm-main">
+    <nav class="navbar scm-navbar px-3 d-flex align-items-center justify-content-between" id="scm-navbar"></nav>
+    <div class="scm-content">
+
+  <!-- ── Filter Bar ─────────────────────────────────────────────────── -->
+  <div class="card chart-card mb-4">
+    <div class="card-body py-2">
+      <div class="row g-2 align-items-end">
+        <div class="col-6 col-sm-3 col-md-2">
+          <label class="form-label small fw-semibold mb-1">From</label>
+          <input type="date" class="form-control form-control-sm" id="filterFrom">
+        </div>
+        <div class="col-6 col-sm-3 col-md-2">
+          <label class="form-label small fw-semibold mb-1">To</label>
+          <input type="date" class="form-control form-control-sm" id="filterTo">
+        </div>
+        <div class="col-6 col-sm-3 col-md-2">
+          <label class="form-label small fw-semibold mb-1">Department ID</label>
+          <input type="number" class="form-control form-control-sm" id="filterDept" placeholder="All">
+        </div>
+        <div class="col-6 col-sm-3 col-md-4 d-flex gap-2 align-items-end">
+          <button class="btn btn-primary btn-sm" onclick="loadAnalytics()">
+            <i class="bi bi-bar-chart me-1"></i>Apply
+          </button>
+          <button class="btn btn-outline-secondary btn-sm" onclick="resetFilters()">
+            <i class="bi bi-x-circle me-1"></i>Reset
+          </button>
+          <div class="ms-auto d-flex gap-2">
+            <button class="btn btn-outline-success btn-sm" id="csvBtn" onclick="exportCSV()" disabled>
+              <i class="bi bi-file-earmark-spreadsheet me-1"></i>CSV
+            </button>
+            <button class="btn btn-outline-danger btn-sm" id="pdfBtn" onclick="exportPDF()" disabled>
+              <i class="bi bi-file-earmark-pdf me-1"></i>PDF
+            </button>
+            <button class="btn btn-outline-primary btn-sm" id="refreshBtn" onclick="loadAnalytics()">
+              <i class="bi bi-arrow-clockwise"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Loading / Error States ─────────────────────────────────────── -->
+  <div id="loadingState" class="text-center py-5 d-none">
+    <div class="spinner-border text-primary" style="width:3rem;height:3rem;"></div>
+    <p class="mt-3 text-muted">Loading analytics…</p>
+  </div>
+  <div id="errorState" class="alert alert-danger d-none mx-1"></div>
+
+  <!-- ── KPI Cards ─────────────────────────────────────────────────── -->
+  <div class="row g-3 mb-4" id="kpiRow"></div>
+
+  <!-- ── Tabbed sections ───────────────────────────────────────────── -->
+  <ul class="nav nav-tabs mb-0" id="analyticsTabs">
+    <li class="nav-item"><button class="nav-link active" data-bs-toggle="tab" data-bs-target="#tabStatus">
+      <i class="bi bi-pie-chart me-1"></i>Status</button></li>
+    <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#tabCategory">
+      <i class="bi bi-tags me-1"></i>Category</button></li>
+    <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#tabPriority">
+      <i class="bi bi-flag me-1"></i>Priority</button></li>
+    <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#tabDept">
+      <i class="bi bi-building me-1"></i>Department</button></li>
+    <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#tabDuplicate">
+      <i class="bi bi-copy me-1"></i>Duplicates</button></li>
+    <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#tabCluster">
+      <i class="bi bi-diagram-3 me-1"></i>Clusters</button></li>
+    <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#tabPredict">
+      <i class="bi bi-graph-up me-1"></i>Predictions</button></li>
+    <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#tabEsc">
+      <i class="bi bi-exclamation-octagon me-1"></i>Escalation</button></li>
+  </ul>
+
+  <div class="tab-content border border-top-0 rounded-bottom p-3 bg-white shadow-sm mb-4" id="analyticsTabContent">
+
+    <!-- STATUS TAB -->
+    <div class="tab-pane fade show active" id="tabStatus">
+      <div class="section-title">Complaint Status Analytics</div>
+      <div class="row g-3">
+        <div class="col-md-5">
+          <div class="card chart-card p-3">
+            <div class="fw-semibold small mb-2">Status Distribution</div>
+            <div class="chart-wrap"><canvas id="chartStatus"></canvas></div>
+          </div>
+        </div>
+        <div class="col-md-7">
+          <div class="card chart-card p-3 h-100">
+            <div class="fw-semibold small mb-3">Status Breakdown</div>
+            <div id="statusTable"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CATEGORY TAB -->
+    <div class="tab-pane fade" id="tabCategory">
+      <div class="section-title">Category Analytics</div>
+      <div class="row g-3">
+        <div class="col-md-6">
+          <div class="card chart-card p-3">
+            <div class="fw-semibold small mb-2">Total vs Resolved by Category</div>
+            <div class="chart-wrap"><canvas id="chartCategory"></canvas></div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card chart-card p-3">
+            <div class="fw-semibold small mb-2">Resolution Rate by Category (%)</div>
+            <div class="chart-wrap"><canvas id="chartCategoryRate"></canvas></div>
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="card chart-card p-3">
+            <div class="fw-semibold small mb-2">Category Detail Table</div>
+            <div class="table-responsive" id="categoryTable"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PRIORITY TAB -->
+    <div class="tab-pane fade" id="tabPriority">
+      <div class="section-title">Priority Analytics</div>
+      <div class="row g-3">
+        <div class="col-md-5">
+          <div class="card chart-card p-3">
+            <div class="fw-semibold small mb-2">Priority Distribution</div>
+            <div class="chart-wrap"><canvas id="chartPriority"></canvas></div>
+          </div>
+        </div>
+        <div class="col-md-7">
+          <div class="card chart-card p-3">
+            <div class="fw-semibold small mb-2">Resolved vs Unresolved by Priority</div>
+            <div class="chart-wrap"><canvas id="chartPriorityStacked"></canvas></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DEPARTMENT TAB -->
+    <div class="tab-pane fade" id="tabDept">
+      <div class="section-title">Department Analytics</div>
+      <div class="row g-3">
+        <div class="col-md-6">
+          <div class="card chart-card p-3">
+            <div class="fw-semibold small mb-2">Complaints per Department</div>
+            <div class="chart-wrap"><canvas id="chartDept"></canvas></div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card chart-card p-3">
+            <div class="fw-semibold small mb-2">Resolution Rate by Department (%)</div>
+            <div class="chart-wrap"><canvas id="chartDeptRate"></canvas></div>
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="card chart-card p-3">
+            <div class="fw-semibold small mb-2">Staff Performance Table</div>
+            <div class="table-responsive" id="deptTable"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DUPLICATES TAB -->
+    <div class="tab-pane fade" id="tabDuplicate">
+      <div class="section-title">Duplicate Complaint Analytics</div>
+      <div class="row g-3">
+        <div class="col-md-4">
+          <div class="card chart-card p-3">
+            <div class="fw-semibold small mb-2">Unique vs Duplicate Ratio</div>
+            <div class="chart-wrap"><canvas id="chartDuplicate"></canvas></div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card chart-card p-3">
+            <div class="fw-semibold small mb-2">Duplicates by Category</div>
+            <div class="chart-wrap"><canvas id="chartDupCategory"></canvas></div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card chart-card p-3 h-100">
+            <div class="fw-semibold small mb-3">Duplicate Summary</div>
+            <div id="dupSummary"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CLUSTER TAB -->
+    <div class="tab-pane fade" id="tabCluster">
+      <div class="section-title">Community Cluster Analytics</div>
+      <div class="row g-3">
+        <div class="col-md-6">
+          <div class="card chart-card p-3">
+            <div class="fw-semibold small mb-2">Complaints &amp; Affected Users per Cluster</div>
+            <div class="chart-wrap"><canvas id="chartCluster"></canvas></div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card chart-card p-3">
+            <div class="fw-semibold small mb-2">Top Reported Locations</div>
+            <div class="chart-wrap"><canvas id="chartLocations"></canvas></div>
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="card chart-card p-3">
+            <div class="fw-semibold small mb-2">Cluster Detail Table</div>
+            <div class="table-responsive" id="clusterTable"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PREDICTION TAB -->
+    <div class="tab-pane fade" id="tabPredict">
+      <div class="section-title">Resolution Time Prediction Analytics</div>
+      <div class="row g-3">
+        <div class="col-md-6">
+          <div class="card chart-card p-3">
+            <div class="fw-semibold small mb-2">Estimated vs Actual Hours (Scatter)</div>
+            <div class="chart-wrap"><canvas id="chartPrediction"></canvas></div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card chart-card p-3">
+            <div class="fw-semibold small mb-2">Prediction Variance by Category/Priority</div>
+            <div class="chart-wrap"><canvas id="chartVariance"></canvas></div>
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="card chart-card p-3">
+            <div class="fw-semibold small mb-2">Prediction Accuracy Table</div>
+            <div class="table-responsive" id="predictionTable"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ESCALATION TAB -->
+    <div class="tab-pane fade" id="tabEsc">
+      <div class="section-title">Escalation Analytics</div>
+      <div class="row g-3">
+        <div class="col-md-4">
+          <div class="card chart-card p-3">
+            <div class="fw-semibold small mb-2">Escalation Level Distribution</div>
+            <div class="chart-wrap"><canvas id="chartEscLevels"></canvas></div>
+          </div>
+        </div>
+        <div class="col-md-8">
+          <div class="card chart-card p-3">
+            <div class="fw-semibold small mb-2">30-Day Escalation Trend</div>
+            <div class="chart-wrap"><canvas id="chartEscTrend"></canvas></div>
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="card chart-card p-3">
+            <div class="fw-semibold small mb-2">Escalation by Department (Stacked)</div>
+            <div class="chart-wrap"><canvas id="chartEscDept"></canvas></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /tab-content -->
+
+</div><!-- /#app -->
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="/frontend/js/api.js"></script>
+<script src="/frontend/js/utils.js"></script>
+<script src="/frontend/js/components.js"></script>
+<script src="/frontend/js/analytics.js"></script>
+<script>
+  const { showToast, showLoading } = SCMUtils;
+  let _lastData = null;  // cache for export
+
+  // ── KPI Render ─────────────────────────────────────────────────────────
+  function renderKPIs(s, dup, esc) {
+    const kpis = [
+      { label:'Total Complaints',  val: s.total,               icon:'bi-collection',        color:'primary' },
+      { label:'Resolution Rate',   val: s.resolution_rate_pct+'%', icon:'bi-graph-up-arrow', color:'success' },
+      { label:'Pending',           val: s.pending,             icon:'bi-hourglass-split',   color:'warning' },
+      { label:'Escalated',         val: esc.total_escalated,   icon:'bi-exclamation-octagon',color:'danger' },
+      { label:'Duplicates',        val: dup.duplicate_count,   icon:'bi-copy',              color:'info'    },
+      { label:'Duplicate Rate',    val: dup.duplicate_rate_pct+'%', icon:'bi-percent',       color:'secondary'},
+      { label:'In Progress',       val: s.in_progress,         icon:'bi-arrow-repeat',      color:'primary' },
+      { label:'Resolved',          val: s.resolved,            icon:'bi-check-circle',      color:'success' },
+    ];
+    document.getElementById('kpiRow').innerHTML = kpis.map(k => `
+      <div class="col-6 col-md-3">
+        <div class="card stat-card p-3">
+          <div class="d-flex align-items-center gap-3">
+            <div class="stat-icon bg-${k.color} bg-opacity-10 text-${k.color}"><i class="bi ${k.icon}"></i></div>
+            <div><div class="fw-bold fs-4">${k.val}</div><div class="text-muted small">${k.label}</div></div>
+          </div>
+        </div>
+      </div>`).join('');
+  }
+
+  // ── Table Renders ──────────────────────────────────────────────────────
+  function renderStatusTable(s) {
+    const rows = [
+      ['Pending',     s.pending,     'warning'],
+      ['Assigned',    s.assigned,    'info'],
+      ['In Progress', s.in_progress, 'primary'],
+      ['Resolved',    s.resolved,    'success'],
+      ['Closed',      s.closed,      'secondary'],
+      ['Escalated',   s.escalated,   'danger'],
+    ];
+    document.getElementById('statusTable').innerHTML = `
+      <table class="table table-sm table-hover mb-0">
+        <thead class="table-light"><tr><th>Status</th><th>Count</th><th>% of Total</th></tr></thead>
+        <tbody>${rows.map(([label, count, color]) => `
+          <tr>
+            <td><span class="badge bg-${color}">${label}</span></td>
+            <td class="fw-bold">${count}</td>
+            <td>
+              <div class="d-flex align-items-center gap-2">
+                <div class="progress flex-grow-1" style="height:8px;">
+                  <div class="progress-bar bg-${color}" style="width:${s.total ? Math.round(count/s.total*100) : 0}%"></div>
+                </div>
+                <span class="small text-muted">${s.total ? Math.round(count/s.total*100) : 0}%</span>
+              </div>
+            </td>
+          </tr>`).join('')}
+        </tbody>
+      </table>`;
+  }
+
+  function renderCategoryTable(category) {
+    document.getElementById('categoryTable').innerHTML = `
+      <table class="table table-sm table-hover mb-0">
+        <thead class="table-light"><tr><th>Category</th><th>Total</th><th>Resolved</th><th>Resolution Rate</th><th>Avg Resolution Time</th></tr></thead>
+        <tbody>${category.breakdown.map(c => `
+          <tr>
+            <td><span class="badge bg-light text-dark border">${c.category}</span></td>
+            <td>${c.total}</td>
+            <td>${c.resolved}</td>
+            <td>
+              <div class="d-flex align-items-center gap-2">
+                <div class="progress flex-grow-1" style="height:8px;min-width:60px;">
+                  <div class="progress-bar bg-success" style="width:${c.resolution_rate_pct}%"></div>
+                </div>
+                <span class="small">${c.resolution_rate_pct}%</span>
+              </div>
+            </td>
+            <td class="text-muted small">${c.avg_resolution_hours != null ? c.avg_resolution_hours+'h' : '—'}</td>
+          </tr>`).join('')}
+        </tbody>
+      </table>`;
+  }
+
+  function renderDeptTable(dept) {
+    document.getElementById('deptTable').innerHTML = `
+      <table class="table table-sm table-hover mb-0">
+        <thead class="table-light"><tr><th>Department</th><th>Total</th><th>Resolved</th><th>Resolution Rate</th><th>Avg Time</th><th>Staff</th></tr></thead>
+        <tbody>${dept.breakdown.map(d => `
+          <tr>
+            <td class="fw-semibold">${d.department_name}</td>
+            <td>${d.total}</td>
+            <td>${d.resolved}</td>
+            <td>
+              <div class="d-flex align-items-center gap-2">
+                <div class="progress flex-grow-1" style="height:8px;min-width:60px;">
+                  <div class="progress-bar bg-success" style="width:${d.resolution_rate_pct}%"></div>
+                </div>
+                <span class="small">${d.resolution_rate_pct}%</span>
+              </div>
+            </td>
+            <td class="text-muted small">${d.avg_resolution_hours != null ? d.avg_resolution_hours+'h' : '—'}</td>
+            <td><span class="badge bg-light text-dark border">${d.staff_count}</span></td>
+          </tr>`).join('')}
+        </tbody>
+      </table>`;
+  }
+
+  function renderClusterTable(cluster) {
+    if (!cluster.clusters.length) {
+      document.getElementById('clusterTable').innerHTML = '<p class="text-muted small p-2">No clusters found. Run clustering from the Admin Dashboard first.</p>';
+      return;
+    }
+    document.getElementById('clusterTable').innerHTML = `
+      <table class="table table-sm table-hover mb-0">
+        <thead class="table-light"><tr><th>Cluster ID</th><th>Complaints</th><th>Affected Users</th><th>Top Location</th><th>Dominant Category</th><th>Severity</th></tr></thead>
+        <tbody>${cluster.clusters.map(c => `
+          <tr>
+            <td><span class="badge bg-primary">#${c.cluster_id}</span></td>
+            <td>${c.complaint_count}</td>
+            <td>${c.affected_users}</td>
+            <td class="text-muted small">${c.top_location || '—'}</td>
+            <td><span class="badge bg-light text-dark border">${c.dominant_category}</span></td>
+            <td>${SCMUtils.priorityBadge(c.dominant_priority)}</td>
+          </tr>`).join('')}
+        </tbody>
+      </table>`;
+  }
+
+  function renderDupSummary(dup) {
+    document.getElementById('dupSummary').innerHTML = `
+      <div class="mb-3">
+        <div class="d-flex justify-content-between mb-1">
+          <span class="small fw-semibold">Duplicate Rate</span>
+          <span class="small fw-bold text-${dup.duplicate_rate_pct > 20 ? 'danger' : 'success'}">${dup.duplicate_rate_pct}%</span>
+        </div>
+        <div class="progress" style="height:10px;">
+          <div class="progress-bar bg-warning" style="width:${dup.duplicate_rate_pct}%"></div>
+        </div>
+      </div>
+      <table class="table table-sm table-borderless mb-0">
+        <tr><td class="text-muted">Total</td><td class="fw-bold">${dup.total_complaints}</td></tr>
+        <tr><td class="text-muted">Duplicates</td><td class="fw-bold text-warning">${dup.duplicate_count}</td></tr>
+        <tr><td class="text-muted">Unique</td><td class="fw-bold text-success">${dup.total_complaints - dup.duplicate_count}</td></tr>
+      </table>`;
+  }
+
+  function renderPredictionTable(pred) {
+    if (!pred.breakdown.length) {
+      document.getElementById('predictionTable').innerHTML = '<p class="text-muted small p-2">No prediction data yet. Complaints need to be resolved to compute actuals.</p>';
+      return;
+    }
+    document.getElementById('predictionTable').innerHTML = `
+      <table class="table table-sm table-hover mb-0">
+        <thead class="table-light"><tr><th>Category</th><th>Priority</th><th>Avg Estimated</th><th>Avg Actual</th><th>Variance</th><th>Samples</th></tr></thead>
+        <tbody>${pred.breakdown.map(p => {
+          const varColor = p.variance_hours == null ? '' : p.variance_hours > 12 ? 'text-danger' : p.variance_hours > 6 ? 'text-warning' : 'text-success';
+          return `<tr>
+            <td><span class="badge bg-light text-dark border">${p.category}</span></td>
+            <td>${SCMUtils.priorityBadge(p.priority)}</td>
+            <td>${p.avg_estimated_hours}h</td>
+            <td>${p.avg_actual_hours != null ? p.avg_actual_hours+'h' : '<span class="text-muted">—</span>'}</td>
+            <td class="${varColor} fw-semibold">${p.variance_hours != null ? '±'+p.variance_hours+'h' : '—'}</td>
+            <td class="text-muted">${p.sample_count}</td>
+          </tr>`;
+        }).join('')}
+        </tbody>
+      </table>`;
+  }
+
+  // ── Main Load ──────────────────────────────────────────────────────────
+  async function loadAnalytics() {
+    const dateFrom = document.getElementById('filterFrom').value || null;
+    const dateTo   = document.getElementById('filterTo').value || null;
+    const deptId   = document.getElementById('filterDept').value || null;
+
+    document.getElementById('loadingState').classList.remove('d-none');
+    document.getElementById('errorState').classList.add('d-none');
+    document.getElementById('kpiRow').innerHTML = '';
+    document.getElementById('csvBtn').disabled = true;
+    document.getElementById('pdfBtn').disabled = true;
+
+    try {
+      // Fetch dashboard summary (one call covers everything except department detail)
+      const [dash, deptData] = await Promise.all([
+        API.getAnalyticsDashboard({ date_from: dateFrom, date_to: dateTo, department_id: deptId }),
+        API.getAnalyticsSection('department', { date_from: dateFrom, date_to: dateTo }),
+      ]);
+
+      _lastData = { ...dash, department: deptData };
+
+      // KPIs
+      renderKPIs(dash.status, dash.duplicate, dash.escalation);
+
+      // All charts
+      SCMAnalytics.renderAll(_lastData);
+
+      // All tables
+      renderStatusTable(dash.status);
+      renderCategoryTable(dash.category);
+      renderDeptTable(deptData);
+      renderClusterTable(dash.cluster);
+      renderDupSummary(dash.duplicate);
+      renderPredictionTable(dash.prediction);
+
+      document.getElementById('csvBtn').disabled = false;
+      document.getElementById('pdfBtn').disabled = false;
+    } catch (err) {
+      const errEl = document.getElementById('errorState');
+      errEl.textContent = err.detail || 'Failed to load analytics. Please try again.';
+      errEl.classList.remove('d-none');
+    } finally {
+      document.getElementById('loadingState').classList.add('d-none');
+    }
+  }
+
+  function resetFilters() {
+    document.getElementById('filterFrom').value = '';
+    document.getElementById('filterTo').value   = '';
+    document.getElementById('filterDept').value = '';
+    loadAnalytics();
+  }
+
+  function exportCSV() {
+    if (!_lastData) return;
+    try { SCMAnalytics.exportCSV(_lastData); }
+    catch(e) { showToast('CSV export failed: ' + e.message, 'danger'); }
+  }
+
+  function exportPDF() {
+    if (!_lastData) return;
+    if (!window.jspdf) { showToast('PDF library not loaded.', 'warning'); return; }
+    try { SCMAnalytics.exportPDF(_lastData); }
+    catch(e) { showToast('PDF export failed: ' + e.message, 'danger'); }
+  }
+
+  // ── Init ───────────────────────────────────────────────────────────────
+  (async () => {
+    const user = await SCMComponents.init('Analytics Dashboard', ['admin']);
+    if (!user) return;
+    loadAnalytics();
+  })();
+</script>
+</body>
+</html>

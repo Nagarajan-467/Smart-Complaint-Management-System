@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Complaint Detail — SCM</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="/frontend/css/app.css" rel="stylesheet">
+</head>
+<body>
+<div class="scm-wrapper">
+  <div class="scm-sidebar" id="scm-sidebar"></div>
+  <div class="scm-main">
+    <nav class="navbar scm-navbar px-3 d-flex align-items-center justify-content-between" id="scm-navbar"></nav>
+    <div class="scm-content">
+  <div class="row justify-content-center">
+    <div class="col-12 col-lg-9">
+
+      <div class="d-flex align-items-center gap-2 mb-3">
+        <a href="complaint-history.html" class="btn btn-outline-secondary btn-sm">
+          <i class="bi bi-arrow-left me-1"></i>Back
+        </a>
+        <h5 class="mb-0 fw-bold" id="pageTitle">Complaint Details</h5>
+      </div>
+
+      <!-- Loading state -->
+      <div id="loadingState" class="text-center py-5">
+        <div class="spinner-border text-primary"></div>
+      </div>
+
+      <!-- Detail card -->
+      <div id="detailCard" class="d-none">
+
+        <!-- Header -->
+        <div class="card table-card mb-3">
+          <div class="card-body">
+            <div class="d-flex flex-wrap align-items-start justify-content-between gap-2">
+              <div>
+                <h5 class="fw-bold mb-1" id="cTitle"></h5>
+                <div class="d-flex flex-wrap gap-2" id="cBadges"></div>
+              </div>
+              <div id="actionButtons"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row g-3">
+          <!-- Left: main info -->
+          <div class="col-md-8">
+            <div class="card table-card mb-3">
+              <div class="card-header bg-white py-2"><span class="fw-semibold">Description</span></div>
+              <div class="card-body">
+                <p id="cDescription" class="mb-0"></p>
+              </div>
+            </div>
+
+            <!-- Inline edit (pending only) -->
+            <div class="card table-card mb-3 d-none" id="editCard">
+              <div class="card-header bg-white py-2">
+                <span class="fw-semibold"><i class="bi bi-pencil me-1"></i>Edit Complaint</span>
+              </div>
+              <div class="card-body">
+                <form id="editForm">
+                  <div class="mb-2">
+                    <label class="form-label small fw-semibold">Title</label>
+                    <input type="text" class="form-control form-control-sm" id="editTitle" minlength="3" maxlength="200" required>
+                  </div>
+                  <div class="mb-2">
+                    <label class="form-label small fw-semibold">Description</label>
+                    <textarea class="form-control form-control-sm" id="editDesc" rows="4" minlength="10" required></textarea>
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label small fw-semibold">Location</label>
+                    <input type="text" class="form-control form-control-sm" id="editLocation" maxlength="200">
+                  </div>
+                  <button type="submit" class="btn btn-sm btn-primary">Save Changes</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary ms-2" onclick="document.getElementById('editCard').classList.add('d-none')">Cancel</button>
+                </form>
+              </div>
+            </div>
+
+            <!-- Resolution notes (if resolved) -->
+            <div class="card table-card d-none" id="resolutionCard">
+              <div class="card-header bg-success bg-opacity-10 py-2">
+                <span class="fw-semibold text-success"><i class="bi bi-check-circle me-1"></i>Resolution Notes</span>
+              </div>
+              <div class="card-body">
+                <p id="cResolutionNotes" class="mb-0"></p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: metadata -->
+          <div class="col-md-4">
+            <div class="card table-card">
+              <div class="card-header bg-white py-2"><span class="fw-semibold">Details</span></div>
+              <div class="card-body">
+                <div class="mb-3">
+                  <div class="detail-label">Status</div>
+                  <div class="detail-value" id="cStatus"></div>
+                </div>
+                <div class="mb-3">
+                  <div class="detail-label">Priority</div>
+                  <div class="detail-value" id="cPriority"></div>
+                </div>
+                <div class="mb-3">
+                  <div class="detail-label">Category</div>
+                  <div class="detail-value" id="cCategory"></div>
+                </div>
+                <div class="mb-3">
+                  <div class="detail-label">Location</div>
+                  <div class="detail-value" id="cLocation"></div>
+                </div>
+                <hr>
+                <div class="mb-3">
+                  <div class="detail-label">Submitted</div>
+                  <div class="detail-value" id="cCreatedAt"></div>
+                </div>
+                <div class="mb-3">
+                  <div class="detail-label">Last Updated</div>
+                  <div class="detail-value" id="cUpdatedAt"></div>
+                </div>
+                <div class="mb-3 d-none" id="resolvedAtRow">
+                  <div class="detail-label">Resolved At</div>
+                  <div class="detail-value" id="cResolvedAt"></div>
+                </div>
+                <hr>
+                <div class="mb-3">
+                  <div class="detail-label">Est. Resolution</div>
+                  <div class="detail-value" id="cEstHours"></div>
+                </div>
+                <div class="mb-3">
+                  <div class="detail-label">Escalation Level</div>
+                  <div class="detail-value" id="cEscalation"></div>
+                </div>
+                <div class="mb-3 d-none" id="duplicateRow">
+                  <div class="detail-label">Duplicate Of</div>
+                  <div class="detail-value" id="cDuplicate"></div>
+                </div>
+                <div class="mb-0 d-none" id="clusterRow">
+                  <div class="detail-label">Cluster ID</div>
+                  <div class="detail-value" id="cCluster"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/frontend/js/api.js"></script>
+<script src="/frontend/js/utils.js"></script>
+<script src="/frontend/js/components.js"></script>
+<script>
+  const { showToast, priorityBadge, statusBadge, formatDate } = SCMUtils;
+  let complaint = null;
+
+  function renderComplaint(c) {
+    complaint = c;
+    document.getElementById('pageTitle').textContent = `Complaint #${c.id}`;
+    document.getElementById('cTitle').textContent = c.title;
+    document.getElementById('cDescription').textContent = c.description;
+    document.getElementById('cStatus').innerHTML  = statusBadge(c.status);
+    document.getElementById('cPriority').innerHTML = priorityBadge(c.priority);
+    document.getElementById('cCategory').innerHTML = `<span class="badge bg-light text-dark border">${c.category}</span>`;
+    document.getElementById('cLocation').textContent  = c.location || '—';
+    document.getElementById('cCreatedAt').textContent = formatDate(c.created_at);
+    document.getElementById('cUpdatedAt').textContent = formatDate(c.updated_at);
+    document.getElementById('cEstHours').textContent  = c.estimated_resolution_hours ? c.estimated_resolution_hours.toFixed(1) + ' hours' : '—';
+    document.getElementById('cEscalation').innerHTML  = c.escalation_level > 0
+      ? `<span class="badge bg-danger">Level ${c.escalation_level}</span>` : '<span class="text-muted">None</span>';
+
+    // Badges row
+    document.getElementById('cBadges').innerHTML = statusBadge(c.status) + ' ' + priorityBadge(c.priority);
+
+    // Resolved
+    if (c.resolved_at) {
+      document.getElementById('resolvedAtRow').classList.remove('d-none');
+      document.getElementById('cResolvedAt').textContent = formatDate(c.resolved_at);
+    }
+    if (c.resolution_notes) {
+      document.getElementById('resolutionCard').classList.remove('d-none');
+      document.getElementById('cResolutionNotes').textContent = c.resolution_notes;
+    }
+
+    // Duplicate
+    if (c.duplicate_of) {
+      document.getElementById('duplicateRow').classList.remove('d-none');
+      document.getElementById('cDuplicate').innerHTML = `<a href="complaint-detail.html?id=${c.duplicate_of}">#${c.duplicate_of}</a>`;
+    }
+
+    // Cluster
+    if (c.cluster_id !== null && c.cluster_id !== undefined) {
+      document.getElementById('clusterRow').classList.remove('d-none');
+      document.getElementById('cCluster').textContent = c.cluster_id;
+    }
+
+    // Edit button (only if pending)
+    const actionButtons = document.getElementById('actionButtons');
+    if (c.status === 'pending') {
+      actionButtons.innerHTML = `<button class="btn btn-outline-primary btn-sm" onclick="showEditForm()"><i class="bi bi-pencil me-1"></i>Edit</button>`;
+    }
+
+    document.getElementById('loadingState').classList.add('d-none');
+    document.getElementById('detailCard').classList.remove('d-none');
+  }
+
+  function showEditForm() {
+    document.getElementById('editTitle').value    = complaint.title;
+    document.getElementById('editDesc').value     = complaint.description;
+    document.getElementById('editLocation').value = complaint.location || '';
+    document.getElementById('editCard').classList.remove('d-none');
+    document.getElementById('editCard').scrollIntoView({ behavior: 'smooth' });
+  }
+
+
+
+    const id = SCMUtils.getParam('id');
+    if (!id) { showToast('No complaint ID specified.', 'danger'); return; }
+
+    try {
+      const c = await API.getComplaint(id);
+      renderComplaint(c);
+    } catch (err) {
+      showToast(err.detail || 'Failed to load complaint.', 'danger');
+    }
+
+    document.getElementById('editForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      try {
+        const updated = await API.updateComplaint(complaint.id, {
+          title:       document.getElementById('editTitle').value.trim(),
+          description: document.getElementById('editDesc').value.trim(),
+          location:    document.getElementById('editLocation').value.trim() || null,
+        });
+        showToast('Complaint updated!', 'success');
+        document.getElementById('editCard').classList.add('d-none');
+        renderComplaint(updated);
+      } catch (err) {
+        showToast(err.detail || 'Update failed.', 'danger');
+      }
+    });
+  })();
+</script>
+</body>
+</html>

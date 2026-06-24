@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>New Complaint — SCM</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="/frontend/css/app.css" rel="stylesheet">
+</head>
+<body>
+<div class="scm-wrapper">
+
+  <div class="scm-sidebar" id="scm-sidebar"></div>
+
+  <div class="scm-main">
+    <nav class="navbar scm-navbar px-3 d-flex align-items-center justify-content-between"
+         id="scm-navbar"></nav>
+
+    <div class="scm-content">
+      <div class="row justify-content-center">
+        <div class="col-12 col-lg-8">
+
+          <div class="card border-0 rounded-3 shadow-sm mb-3 p-3"
+               style="background:linear-gradient(135deg,#e8f4ff,#f0f7ff);">
+            <div class="d-flex align-items-center gap-3">
+              <i class="bi bi-robot text-primary fs-2"></i>
+              <div>
+                <div class="fw-bold">AI-Powered Submission</div>
+                <div class="small text-muted">Your complaint will be automatically categorized,
+                  prioritized, and checked for duplicates.</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Form card -->
+          <div class="card table-card" id="formCard">
+            <div class="card-header bg-white py-3">
+              <h5 class="mb-0 fw-bold">
+                <i class="bi bi-plus-circle me-2 text-primary"></i>Submit a Complaint
+              </h5>
+            </div>
+            <div class="card-body">
+              <div id="alertBox" class="alert alert-danger d-none"></div>
+
+              <form id="complaintForm" novalidate>
+                <div class="mb-3">
+                  <label class="form-label fw-semibold">Title <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control" id="title"
+                         placeholder="Brief description of the issue"
+                         required minlength="3" maxlength="200">
+                  <div class="invalid-feedback">Title must be at least 3 characters.</div>
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label fw-semibold">Description <span class="text-danger">*</span></label>
+                  <textarea class="form-control" id="description" rows="5"
+                            placeholder="Describe the issue in detail…"
+                            required minlength="10"></textarea>
+                  <div class="invalid-feedback">Description must be at least 10 characters.</div>
+                  <div class="form-text" id="descCounter">0 / 2000</div>
+                </div>
+
+                <div class="row g-3 mb-3">
+                  <div class="col-md-6">
+                    <label class="form-label fw-semibold">Category</label>
+                    <select class="form-select" id="category">
+                      <option value="general" selected>General (Auto-detect)</option>
+                      <option value="network">Network</option>
+                      <option value="electrical">Electrical</option>
+                      <option value="plumbing">Plumbing</option>
+                      <option value="hostel">Hostel</option>
+                      <option value="classroom">Classroom</option>
+                    </select>
+                    <div class="form-text">Leave as General for AI auto-detection.</div>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label fw-semibold">Priority</label>
+                    <select class="form-select" id="priority">
+                      <option value="low" selected>Low</option>
+                      <option value="medium">Medium</option>
+                      <option value="high">High</option>
+                    </select>
+                    <div class="form-text">AI may upgrade priority based on content.</div>
+                  </div>
+                </div>
+
+                <div class="mb-4">
+                  <label class="form-label fw-semibold">Location</label>
+                  <input type="text" class="form-control" id="location"
+                         placeholder="e.g. Block A, Room 101" maxlength="200">
+                </div>
+
+                <div class="d-flex gap-2">
+                  <button type="submit" class="btn btn-primary fw-semibold" id="submitBtn">
+                    <i class="bi bi-send me-1"></i>Submit Complaint
+                  </button>
+                  <a href="/frontend/pages/student/dashboard.html"
+                     class="btn btn-outline-secondary">Cancel</a>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <!-- Success card -->
+          <div id="successCard" class="card border-0 rounded-3 shadow-sm d-none mt-3">
+            <div class="card-body text-center py-5">
+              <i class="bi bi-check-circle-fill text-success" style="font-size:3.5rem;"></i>
+              <h5 class="mt-3 fw-bold">Complaint Submitted!</h5>
+              <div id="successDetails" class="text-muted mb-3"></div>
+              <p class="small text-muted">
+                Redirecting to dashboard in <strong id="countdown">3</strong>s…
+              </p>
+              <div class="d-flex justify-content-center gap-2">
+                <a href="/frontend/pages/student/dashboard.html" class="btn btn-primary">
+                  <i class="bi bi-house me-1"></i>Go Now
+                </a>
+                <a href="/frontend/pages/student/create-complaint.html"
+                   class="btn btn-outline-secondary">Submit Another</a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div><!-- /.scm-content -->
+  </div><!-- /.scm-main -->
+</div><!-- /.scm-wrapper -->
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/frontend/js/api.js"></script>
+<script src="/frontend/js/utils.js"></script>
+<script src="/frontend/js/components.js"></script>
+<script>
+(async () => {
+  const user = await SCMComponents.init('New Complaint', ['student']);
+  if (!user) return;
+
+  // Character counter
+  document.getElementById('description').addEventListener('input', function () {
+    document.getElementById('descCounter').textContent = `${this.value.length} / 2000`;
+  });
+
+  // Form submit
+  document.getElementById('complaintForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const form = e.target;
+    form.classList.add('was-validated');
+    if (!form.checkValidity()) return;
+
+    const payload = {
+      title:       document.getElementById('title').value.trim(),
+      description: document.getElementById('description').value.trim(),
+      category:    document.getElementById('category').value,
+      priority:    document.getElementById('priority').value,
+      location:    document.getElementById('location').value.trim() || null,
+    };
+
+    const btn = document.getElementById('submitBtn');
+    btn.disabled = true;
+    btn.innerHTML = '<span class="spinner-border spinner-border-sm me-1"></span>Submitting…';
+    document.getElementById('alertBox').classList.add('d-none');
+
+    try {
+      const complaint = await API.createComplaint(payload);
+
+      // Show success
+      document.getElementById('formCard').classList.add('d-none');
+      document.getElementById('successCard').classList.remove('d-none');
+      document.getElementById('successDetails').innerHTML =
+        `Complaint <strong>#${complaint.id}</strong> created.<br>
+         Category: <strong>${complaint.category}</strong> &nbsp;|&nbsp;
+         Priority: <strong>${complaint.priority}</strong>` +
+        (complaint.duplicate_of
+          ? `<br><small class="text-warning">
+               <i class="bi bi-exclamation-triangle me-1"></i>
+               Similar to existing complaint #${complaint.duplicate_of}
+             </small>` : '');
+
+      // Countdown redirect
+      let s = 3;
+      const timer = setInterval(() => {
+        s--;
+        const el = document.getElementById('countdown');
+        if (el) el.textContent = s;
+        if (s <= 0) {
+          clearInterval(timer);
+          window.location.href = '/frontend/pages/student/dashboard.html';
+        }
+      }, 1000);
+
+    } catch (err) {
+      const box = document.getElementById('alertBox');
+      box.textContent = err.detail || err.message || 'Submission failed.';
+      box.classList.remove('d-none');
+      btn.disabled = false;
+      btn.innerHTML = '<i class="bi bi-send me-1"></i>Submit Complaint';
+    }
+  });
+})();
+</script>
+</body>
+</html>
