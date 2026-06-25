@@ -2,7 +2,7 @@
 Complaint model — the core entity of the system.
 Tracks complaints from creation through resolution.
 """
-
+# imort standard libraries
 import enum
 from datetime import datetime
 
@@ -21,7 +21,7 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.database import Base
 
-
+## Complaint Classification Enums
 class ComplaintCategory(str, enum.Enum):
     """Categories for automatic complaint classification."""
     NETWORK = "network"
@@ -31,7 +31,7 @@ class ComplaintCategory(str, enum.Enum):
     CLASSROOM = "classroom"
     GENERAL = "general"
 
-
+# Complaint Priority and Status Enums
 class ComplaintPriority(str, enum.Enum):
     """Priority levels for complaints."""
     LOW = "low"
@@ -49,7 +49,7 @@ class ComplaintStatus(str, enum.Enum):
     CLOSED = "closed"
     ESCALATED = "escalated"
 
-
+## Complaint ORM Model
 class Complaint(Base):
     __tablename__ = "complaints"
 

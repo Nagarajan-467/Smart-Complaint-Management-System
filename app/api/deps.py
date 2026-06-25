@@ -1,7 +1,7 @@
 """
 FastAPI dependencies for authentication and authorization.
 """
-
+# import standard libraries
 from collections.abc import Callable
 from typing import Annotated
 
@@ -19,7 +19,7 @@ from app.services import auth_service
 # OAuth2 standard defines where the client should send credentials to get a token
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/api/v1/auth/login")
 
-
+## Dependency Functions
 async def get_current_user(
     token: Annotated[str, Depends(oauth2_scheme)],
     db: Annotated[Session, Depends(get_db)]
@@ -49,7 +49,7 @@ async def get_current_user(
         raise credentials_exception
     return user
 
-
+# Dependency to ensure the current user is active.
 async def get_current_active_user(
     current_user: Annotated[User, Depends(get_current_user)]
 ) -> User:
@@ -58,7 +58,7 @@ async def get_current_active_user(
         raise HTTPException(status_code=400, detail="Inactive user")
     return current_user
 
-
+# Dependency factory to enforce role-based access control.
 def require_roles(allowed_roles: list[UserRole]) -> Callable:
     """
     Dependency factory to enforce role-based access control.
