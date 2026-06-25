@@ -21,6 +21,8 @@ const SCMAnalytics = (() => {
     if (_charts[id]) { _charts[id].destroy(); delete _charts[id]; }
   }
 
+
+  // ── Chart.js Factory ─────────────────────────────────────────────────────
   function _make(id, config) {
     _destroy(id);
     const ctx = document.getElementById(id);
@@ -64,6 +66,7 @@ const SCMAnalytics = (() => {
     });
   }
 
+  // ── Category Resolution Rate ─────────────────────────────────────────────
   function renderCategoryResolutionRate(category) {
     const sorted = [...category.breakdown].sort((a, b) => b.resolution_rate_pct - a.resolution_rate_pct);
     _make('chartCategoryRate', {
@@ -240,6 +243,7 @@ const SCMAnalytics = (() => {
     });
   }
 
+  // ── Escalation Trend ─────────────────────────────────────────────────────
   function renderEscalationTrend(esc) {
     if (!esc.trend_last_30_days.length) return;
     _make('chartEscTrend', {

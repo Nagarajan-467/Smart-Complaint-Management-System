@@ -99,6 +99,7 @@ async function deleteComplaint(id) {
   return request(`/api/v1/complaints/${id}`, { method: 'DELETE' });
 }
 
+// ── Assignment & Clustering APIs ─────────────────────────────────────────
 async function assignComplaint(id, assignedTo) {
   return request(`/api/v1/complaints/${id}/assign`, {
     method: 'POST',
@@ -133,6 +134,8 @@ async function getAnalyticsDashboard(params = {}) {
   return request(`/api/v1/analytics/dashboard?${qs}`);
 }
 
+
+// ── Analytics Section API ─────────────────────────────────────────────────
 async function getAnalyticsSection(section, params = {}) {
   const qs = new URLSearchParams();
   Object.entries(params).forEach(([k, v]) => { if (v !== null && v !== undefined && v !== '') qs.set(k, v); });
