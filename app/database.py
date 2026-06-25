@@ -2,7 +2,7 @@
 Smart Complaint Management System
 SQLAlchemy database engine, session management, and declarative base.
 """
-
+# imort standard libraries
 from sqlalchemy import create_engine, event, text
 from sqlalchemy.orm import DeclarativeBase, Session, sessionmaker
 
@@ -32,6 +32,9 @@ engine = create_engine(
     pool_recycle=3600,    # Recycle connections every hour
 )
 
+# ---------------------------------------------------------------------------
+# MySQL UTF-8 Configuration
+# ---------------------------------------------------------------------------   
 
 @event.listens_for(engine, "connect")
 def _set_mysql_charset(dbapi_connection, connection_record):
@@ -83,12 +86,17 @@ def init_db() -> None:
     logger.info("Database tables created / verified.")
 
 
+# ---------------------------------------------------------------------------
+# Database Connectivity Check
+# ---------------------------------------------------------------------------
+
+
 def check_db_connection() -> bool:
     """Test database connectivity. Returns True if successful."""
     try:
         with engine.connect() as conn:
             conn.execute(text("SELECT 1"))
-        logger.info("Database connection verified.")
+        logger.info("Database connection verified.") 
         return True
     except Exception as exc:
         logger.error("Database connection failed: %s", exc)
