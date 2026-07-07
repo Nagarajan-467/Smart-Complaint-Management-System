@@ -1147,3 +1147,5 @@ ValueError: password cannot be longer than 72 bytes, truncate manually if necess
 2026-07-07 12:37:28 | INFO     | smart_complaint.app.database.database:102 | Database connection verified.
 2026-07-07 12:37:28 | INFO     | smart_complaint.app.services.scheduler.scheduler:53 | Escalation scheduler stopped.
 2026-07-07 12:37:28 | INFO     | smart_complaint.app.main.main:50 | Shutting down SmartComplaintManager
+2026-07-07 12:54:25 | INFO     | smart_complaint.logging_config:62 | Logging initialized — level=DEBUG, file=logs/app.log
+2026-07-07 12:54:29 | INFO     | smart_complaint.app.main.main:127 | Application created successfully.
