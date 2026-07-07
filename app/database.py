@@ -38,7 +38,10 @@ engine = create_engine(
 
 @event.listens_for(engine, "connect")
 def _set_mysql_charset(dbapi_connection, connection_record):
-    """Ensure every new connection uses utf8mb4."""
+    """Ensure every new MySQL connection uses utf8mb4."""
+    if engine.dialect.name != "mysql":
+        return
+
     cursor = dbapi_connection.cursor()
     cursor.execute("SET NAMES utf8mb4 COLLATE utf8mb4_unicode_ci")
     cursor.close()

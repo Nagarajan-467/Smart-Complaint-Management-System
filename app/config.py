@@ -4,6 +4,7 @@ Configuration module using Pydantic Settings for type-safe environment variable 
 """
 
 from functools import lru_cache
+from pathlib import Path
 from urllib.parse import quote_plus
 
 from pydantic_settings import BaseSettings, SettingsConfigDict
@@ -31,6 +32,7 @@ class Settings(BaseSettings):
     db_user: str = "root"
     db_password: str = ""
     db_name: str = "smart_complaint_db"
+    database_url_override: str | None = None
 
     # JWT
     jwt_secret_key: str = "change-me-in-production"
@@ -53,7 +55,19 @@ class Settings(BaseSettings):
 
     @property
     def database_url(self) -> str:
-        """Construct the MySQL database URL for SQLAlchemy."""
+        """Return a MySQL URL when credentials are available; otherwise fall back to SQLite."""
+        if self.database_url_override:
+            return self.database_url_override
+
+        sqlite_path = Path(__file__).resolve().parent.parent / "app.db"
+        sqlite_url = f"sqlite:///{sqlite_path}"
+
+        if self.app_env == "production":
+            return sqlite_url
+
+        if not self.db_host or not self.db_user or not self.db_name:
+            return sqlite_url
+
         encoded_password = quote_plus(self.db_password)
         return (
             f"mysql+pymysql://{self.db_user}:{encoded_password}"
